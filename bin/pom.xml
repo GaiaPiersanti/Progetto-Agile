@@ -22,25 +22,6 @@
       <version>5.10.0</version>
       <scope>test</scope>
     </dependency>
-    <!-- Java Fx Dependency -->
-	<dependency>
-    	<groupId>org.openjfx</groupId>
-    	<artifactId>javafx</artifactId>
-    	<version>11</version>
-    	<type>pom</type>
-	</dependency>
-    <!-- Java Fx Controls Dependency -->
-	<dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-controls</artifactId>
-        <version>11</version>
-    </dependency>
-    <!-- Java Fx FXML Dependency -->
-    <dependency>
-    	<groupId>org.openjfx</groupId>
-    	<artifactId>javafx-fxml</artifactId>
-    	<version>11.0.1</version>
-	</dependency>    
   </dependencies>
 
   <repositories>
@@ -82,16 +63,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      
-      <!-- Java Fx Plugin -->
-      <plugin>
-          <groupId>org.openjfx</groupId>
-          <artifactId>javafx-maven-plugin</artifactId>
-          <version>11</version>
-          <configuration>
-          	<mainClass>org.example.Javafx</mainClass>
-          </configuration>
       </plugin>
     </plugins>
   </build>

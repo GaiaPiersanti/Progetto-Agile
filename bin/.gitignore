@@ -1,0 +1,42 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+*.iml
+.idea/
+out/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+*.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Compilati
+*.class
+
+# Cartelle di build
+target/
+build/
+
+# File di log
+*.log
+
+# File temporanei
+*.tmp
+*.bak
+*.swp
+
+# File di sistema (macOS)
+.DS_Store
+
+# Maven specific
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
