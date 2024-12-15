@@ -43,20 +43,18 @@
 	</dependency>    
   </dependencies>
 
+
+
   <repositories>
     <repository>
-      <id>oss.sonatype.org-snapshot</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
+      <id>central</id>
+      <url>https://repo.maven.apache.org/maven2</url>
     </repository>
   </repositories>
 
+
   <build>
+
     <plugins>
       <!-- Maven Compiler Plugin (per supportare Java 21) -->
       <plugin>
@@ -93,6 +91,27 @@
           	<mainClass>org.example.Javafx</mainClass>
           </configuration>
       </plugin>
+
+        <!--
+         Plugin per il controllo di stile del codice con Checkstyle
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>3.6.0</version>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>checkstyle</goal>
+                </goals>
+                <configuration>
+                  <configLocation>src/main/resources/checkstyle.xml</configLocation>
+                  <encoding>UTF-8</encoding>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+      -->
     </plugins>
   </build>
 </project>
