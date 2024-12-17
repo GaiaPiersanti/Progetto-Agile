@@ -21,5 +21,6 @@ private Stage dialogStageIn;
 		System.out.println("io non sono entrato");
 
 		dialogStageIn.close();
+		
 	}
 }
