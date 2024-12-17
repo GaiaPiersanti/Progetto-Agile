@@ -40,3 +40,4 @@ build/
 # Maven specific
 .mvn/
 !/.mvn/wrapper/maven-wrapper.jar
+/bin/

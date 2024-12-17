@@ -3,10 +3,11 @@ package FirstRow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
+
+import FirstRow.view.LoginMignonController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import FirstRow.View.LoginMignonController;
 
 public class MainFx extends Application {
 	 private Stage primaryStage;
