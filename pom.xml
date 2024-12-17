@@ -23,13 +23,32 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- Java Fx Dependency -->
+	<dependency>
+    	<groupId>org.openjfx</groupId>
+    	<artifactId>javafx</artifactId>
+    	<version>11</version>
+    	<type>pom</type>
+	</dependency>
+    <!-- Java Fx Controls Dependency -->
+	<dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>11</version>
+    </dependency>
+    <!-- Java Fx FXML Dependency -->
+    <dependency>
+    	<groupId>org.openjfx</groupId>
+    	<artifactId>javafx-fxml</artifactId>
+    	<version>11.0.1</version>
+	</dependency>    
+
     <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
     <dependency>
       <groupId>com.mysql</groupId>
       <artifactId>mysql-connector-j</artifactId>
       <version>8.4.0</version>
     </dependency>
-
 
 
   </dependencies>
@@ -72,6 +91,16 @@
           </execution>
         </executions>
       </plugin>
+      
+      <!-- Java Fx Plugin -->
+      <plugin>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-maven-plugin</artifactId>
+          <version>11</version>
+          <configuration>
+          	<mainClass>org.example.Javafx</mainClass>
+          </configuration>
+      </plugin>
 
         <!--
          Plugin per il controllo di stile del codice con Checkstyle
@@ -93,9 +122,6 @@
             </executions>
           </plugin>
       -->
-
-
-
     </plugins>
   </build>
 </project>
