@@ -1,10 +1,9 @@
-package FirstRow.View;
-
+package FirstRow.view;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
-public class RispostaLoginSuccessoController {
+public class RispostaLoginInsucessoController {
 
 	
 private Stage dialogStageIn;
@@ -19,7 +18,9 @@ private Stage dialogStageIn;
 	
 	@FXML
 	private void handleImput() {
-		System.out.println("io sono entrato");
+		System.out.println("io non sono entrato");
+
 		dialogStageIn.close();
+		
 	}
 }

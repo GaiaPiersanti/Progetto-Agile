@@ -21,9 +21,14 @@
                   <Insets left="50.0" top="10.0" />
                </FlowPane.margin>
             </PasswordField>
+            <Button fx:id="returnbutton" mnemonicParsing="false" onAction="#chiudi" text="Return">
+               <FlowPane.margin>
+                  <Insets left="50.0" top="10.0" />
+               </FlowPane.margin>
+            </Button>
             <Button fx:id="LogButton" mnemonicParsing="false" onAction="#handleImput" onMouseClicked="#handleImput" text="LogIn">
                <FlowPane.margin>
-                  <Insets left="100.0" top="10.0" />
+                  <Insets left="50.0" top="10.0" />
                </FlowPane.margin>
             </Button>
          </children>
