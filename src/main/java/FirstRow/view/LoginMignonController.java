@@ -25,6 +25,7 @@ public class LoginMignonController {
 	
 	private Stage dialogStageIn;
 	private boolean ok;
+	private Scene rettiffica;
 
 	
 	
@@ -36,6 +37,7 @@ public class LoginMignonController {
 	
     public void setDialogStage(Stage dialogStage) {
         this.dialogStageIn = dialogStage;
+        this.rettiffica = new Scene(BoxIniziale.setupBox(dialogStage), 700, 500);
     }
 	
     
@@ -127,6 +129,10 @@ public class LoginMignonController {
 	
 	@FXML
 	private void chiudi() {
-		dialogStageIn.close();
+		try {
+			dialogStageIn.setScene(rettiffica);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package FirstRow.mysqlClient;
+package FirstRow;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

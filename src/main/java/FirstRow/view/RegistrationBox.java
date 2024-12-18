@@ -1,6 +1,5 @@
 package FirstRow.view;
-import com.codingds.controller.*;
-import com.codingds.mysqlClient.*;
+import FirstRow.Database;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -65,10 +64,10 @@ public class RegistrationBox {
         GridPane.setConstraints(buttonIndietro, 5, 4);
 
 
-        buttonIndietro.setOnAction(_ ->  stage.setScene( scene3 = new Scene(BoxIniziale.setupBox(stage), 700, 500)));
+        buttonIndietro.setOnAction(a ->  stage.setScene( scene3 = new Scene(BoxIniziale.setupBox(stage), 700, 500)));
 
 
-        buttonRegistrazione.setOnAction(_ -> {
+        buttonRegistrazione.setOnAction(a -> {
             try {
                 Database.connection(pInput.getText(), emailInput.getText(),usernameInput.getText(), null);
                 layoutPRegsitarzione = new StackPane();

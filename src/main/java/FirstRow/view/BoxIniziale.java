@@ -1,8 +1,13 @@
 package FirstRow.view;
 
+import java.io.IOException;
+
+import FirstRow.MainFx;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -29,6 +34,22 @@ public class BoxIniziale {
         registrationB.setOnAction(e -> {
             stage.setTitle("Registrazione");
             stage.setScene(scene2);});
+        loginB.setOnAction(e -> {
+            stage.setTitle("Registrazione");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFx.class.getResource("view/loginMignon.fxml"));
+    			AnchorPane rootLayout;
+				try {
+					rootLayout = (AnchorPane) loader.load();
+				
+    			Scene sceneLI = new Scene(rootLayout);
+               stage.setScene(sceneLI);
+               LoginMignonController controller = loader.getController();
+               controller.setDialogStage(stage);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+           /* stage.setScene(scene2);*/});
 
         return vBox;
 
