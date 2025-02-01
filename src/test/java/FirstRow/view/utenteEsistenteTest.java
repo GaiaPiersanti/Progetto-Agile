@@ -19,10 +19,10 @@ class utenteEsistenteTest {
 	@BeforeEach
 	void aggintà() {
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/firstrow","root","Higdrasil1!34");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/AgileDB","root","MaicholZed01.");
 			Statement stmt = con.createStatement();
-			exist1 = stmt.executeUpdate("INSERT INTO firstrow.utente_registrato (username,mail,pass) values ('Mino','Dedalo@gmail.com','Tauro');");
-			exist2 = stmt.executeUpdate("DELETE FROM firstrow.utente_registrato WHERE username='gino' AND mail='giorgino2@gmail.com' AND pass='ringolino'");
+			exist1 = stmt.executeUpdate("INSERT INTO utenti (username,email,pass) values ('Mino','Dedalo@gmail.com','Tauro');");
+			exist2 = stmt.executeUpdate("DELETE FROM utenti WHERE username='gino' AND email='giorgino2@gmail.com' AND pass='ringolino'");
 			stmt.close();
 			con.close();	
 		} catch (SQLException e) {
@@ -32,13 +32,13 @@ class utenteEsistenteTest {
 	@AfterEach
 	void elimina() {
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/firstrow","root","Higdrasil1!34");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/AgileDB","root","MaicholZed01.");
 			Statement stmt = con.createStatement();
 			if(exist1>0) {
-				stmt.executeUpdate("DELETE FROM firstrow.utente_registrato WHERE username='Mino' AND mail='Dedalo@gmail.com' AND pass='Tauro'");
+				stmt.executeUpdate("DELETE FROM utenti WHERE username='Mino' AND email='Dedalo@gmail.com' AND pass='Tauro'");
 			}
 			if(exist2>0) {
-				stmt.executeUpdate("INSERT INTO firstrow.utente_registrato (username,mail,pass) values ('gino','giorgino2@gmail.com','ringolino');");
+				stmt.executeUpdate("INSERT INTO utenti (username,email,pass) values ('gino','giorgino2@gmail.com','ringolino');");
 			}
 			stmt.close();
 			con.close();
@@ -53,6 +53,7 @@ class utenteEsistenteTest {
 		LoginMignonController m=new LoginMignonController();
 		assertTrue(m.utenteEsistente("Mino","Tauro"));
 		assertTrue(m.utenteEsistente("Dedalo@gmail.com","Tauro"));
+		assertFalse(m.utenteEsistente("Mino",""));
 		assertFalse(m.utenteEsistente("gino","ringolino"));
 		assertFalse(m.utenteEsistente("giorgino2@gmail.com","ringolino"));
 	}
