@@ -11,8 +11,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import FirstRow.view.LoginMignonController;
-
 class utenteEsistenteTest {
 	int exist1=0, exist2=0;
 	
