@@ -2,6 +2,7 @@ package FirstRow;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import FirstRow.view.DashboardController;
 import FirstRow.view.PaginaIController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,10 +28,6 @@ public class MainFx extends Application {
 		Scene scenaI = new Scene(rootPI, 700, 500); 
 		primaryStage.setTitle("Pianificator");
 		primaryStage.setScene(scenaI);
-		primaryStage.setMaxWidth(700);
-		primaryStage.setMinHeight(500);
-		primaryStage.setMaxHeight(500);
-		primaryStage.setMinWidth(700);
 		primaryStage.show();
 				
 	}

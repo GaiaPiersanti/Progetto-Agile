@@ -77,8 +77,8 @@ public class Database {
                 st.setString(1, email);
                 st.setString(2, pInput);
                 st.setString(3, usernameI);
-
                 st.executeUpdate();
+                
             }
 
         } catch (SQLException e) {
