@@ -4,7 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,16 +19,18 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
 import FirstRow.Database;
 import FirstRow.Model.Attivita;
 
-public class ElencoAttivitaController {
+public class ElencoAttivitaController implements Initializable{
 	
 	@FXML
 	private TableView<Attivita> TabellaAttivita;
@@ -45,14 +49,23 @@ public class ElencoAttivitaController {
 	private ImageView bannerImageIP;
 	@FXML
 	private ImageView bannerImageIE;
+	@FXML
+	private ImageView bannerImageICalendario;
 
+	@FXML
+	private TextField SearchField;
+	
 	private Stage StageIn;
 	
-	@FXML
-    private void initialize() {
+	@Override
+    public void initialize ( URL location, ResourceBundle resources ) {
 		File bannerFile = new File("src/main/resources/Immagini/CasaIcona.png");
         Image iconaC = new Image(bannerFile.toURI().toString());
         bannerImageIC.setImage(iconaC);
+        
+        File bannerFileCalenadrio = new File("src/main/resources/Immagini/IconaCalendario.png");
+        Image iconaCalenadrio = new Image(bannerFileCalenadrio.toURI().toString());
+        bannerImageICalendario.setImage(iconaCalenadrio);
 
         File bannerFileLista = new File("src/main/resources/Immagini/IconaLista.png");
         Image iconaE = new Image(bannerFileLista.toURI().toString());
@@ -62,6 +75,11 @@ public class ElencoAttivitaController {
         Image iconaP = new Image(bannerFileProfilo.toURI().toString());
         bannerImageIP.setImage(iconaP);
         
+        
+        ColNome.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Nome"));
+        ColCategoria.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Categoria"));
+        ColScadenza.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Scadenza"));
+        ColPriorita.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Priorita"));
         
 		Connection con = Database.collegamento();
 		ObservableList<Attivita> list = FXCollections.observableArrayList();
@@ -90,4 +108,6 @@ public class ElencoAttivitaController {
 	public void setDialogStage(Stage dialogStage) {
         this.StageIn = dialogStage;
     }
+
+
 }

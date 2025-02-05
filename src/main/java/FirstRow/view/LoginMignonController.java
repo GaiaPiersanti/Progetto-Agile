@@ -116,6 +116,27 @@ public class LoginMignonController {
 
 		if(ok) {
 			dialogStageIn.close();
+			try {
+				// Load the fxml file and create a new stage for the popup dialog.
+					FXMLLoader loader = new FXMLLoader();
+			        loader.setLocation(MainFx.class.getResource("view/ElencoAttivita.fxml"));
+			        Parent page = loader.load();
+
+
+			        // Create the dialog Stage.
+			        Stage dialogStage = new Stage();
+			        dialogStage.setTitle("Elenco Attività");
+			        Scene scene = new Scene(page);
+			        dialogStage.setScene(scene);
+
+			    	// Set the person into the controller.
+			        ElencoAttivitaController controller = loader.getController();
+			    	controller.setDialogStage(dialogStage);
+			    	dialogStage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		}
 	}
 	
