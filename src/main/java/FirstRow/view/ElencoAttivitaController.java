@@ -38,10 +38,31 @@ public class ElencoAttivitaController {
 	private TableColumn<Attivita,String> ColScadenza;
 	@FXML
 	private TableColumn<Attivita,String> ColPriorita;
+	
+	@FXML
+	private ImageView bannerImageIC;
+	@FXML
+	private ImageView bannerImageIP;
+	@FXML
+	private ImageView bannerImageIE;
 
+	private Stage StageIn;
 	
 	@FXML
     private void initialize() {
+		File bannerFile = new File("src/main/resources/Immagini/CasaIcona.png");
+        Image iconaC = new Image(bannerFile.toURI().toString());
+        bannerImageIC.setImage(iconaC);
+
+        File bannerFileLista = new File("src/main/resources/Immagini/IconaLista.png");
+        Image iconaE = new Image(bannerFileLista.toURI().toString());
+        bannerImageIE.setImage(iconaE);
+
+        File bannerFileProfilo = new File("src/main/resources/Immagini/IconaProfilo.png");
+        Image iconaP = new Image(bannerFileProfilo.toURI().toString());
+        bannerImageIP.setImage(iconaP);
+        
+        
 		Connection con = Database.collegamento();
 		ObservableList<Attivita> list = FXCollections.observableArrayList();
 		if (con == null) {
@@ -55,11 +76,18 @@ public class ElencoAttivitaController {
 			while(rs.next()) {
 				list.add(new Attivita(rs.getString("nome"),rs.getString("categoria"),rs.getString("scadenza"),rs.getString("priorita")));
 			}
+			rs.close();
+			stmt.close();
+			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		TabellaAttivita.setItems(list);
+    }
+	
+	public void setDialogStage(Stage dialogStage) {
+        this.StageIn = dialogStage;
     }
 }
