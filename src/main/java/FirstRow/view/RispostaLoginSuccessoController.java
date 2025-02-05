@@ -20,6 +20,7 @@ private Stage dialogStageIn;
 	@FXML
 	private void handleImput() {
 		System.out.println("io sono entrato");
+		
 		dialogStageIn.close();
 	}
 }

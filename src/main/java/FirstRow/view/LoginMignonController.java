@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import FirstRow.Database;
 import FirstRow.MainFx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -122,7 +124,7 @@ public class LoginMignonController {
 	 boolean utenteEsistente(String x, String y) {
 		boolean res=false;
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/AgileDB","root","MaicholZed01.");
+			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM utenti WHERE email='"+x+"'AND pass='"+y+"' or username='"+x+"' AND pass='"+y+"'");
 			
