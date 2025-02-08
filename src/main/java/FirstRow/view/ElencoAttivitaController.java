@@ -109,5 +109,28 @@ public class ElencoAttivitaController implements Initializable{
         this.StageIn = dialogStage;
     }
 
-
+	
+	@FXML
+	private void handleAggiunta() {
+		//TO-DO inserire qui i comandi relativi al aggiunta di una attività
+	}
+	
+	
+	@FXML
+	private void handleModifica() {
+		//TO-DO inserire qui i comandi relativi alla modifica di una attività
+	}
+	
+	
+	@FXML
+	private void handleElimina() {
+		//TO-DO inserire qui i comandi relativi alla cancellazione di una attività
+	}
+	
+	
+	
+	@FXML
+	private void handleRicercaAvanzata() {
+		//TO-DO inserire qui i comandi relativi alla ricerca avanzata delle attività
+	}
 }

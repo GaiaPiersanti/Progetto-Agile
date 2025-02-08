@@ -58,6 +58,20 @@
       <artifactId>mysql-connector-j</artifactId>
       <version>8.4.0</version>
     </dependency>
+	
+	<!-- TestFx Dependencys -->
+	<dependency>
+    	<groupId>org.testfx</groupId>
+    	<artifactId>testfx-core</artifactId>
+    	<version>4.0.18</version>
+    	<scope>test</scope>
+	</dependency>
+    <dependency>
+    	<groupId>org.testfx</groupId>
+    	<artifactId>testfx-junit5</artifactId>
+    	<version>4.0.18</version>
+    	<scope>test</scope>
+	</dependency>
 
 <!-- non so cosa siano viene dal marasma di michele-->
 <dependency>
@@ -175,6 +189,7 @@
           <mainClass>FirstRow.App</mainClass>
         </configuration>
       </plugin>
+      
         <!--
          Plugin per il controllo di stile del codice con Checkstyle
           <plugin>

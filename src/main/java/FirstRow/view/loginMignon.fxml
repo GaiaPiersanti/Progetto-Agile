@@ -37,7 +37,7 @@
                   </InnerShadow>
                </effect>
             </PasswordField>
-            <Button layoutX="48.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleImput" prefHeight="40.0" prefWidth="222.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Log in">
+            <Button fx:id="LogInButton" layoutX="48.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleImput" prefHeight="40.0" prefWidth="222.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Log in">
                <effect>
                   <DropShadow>
                      <color>

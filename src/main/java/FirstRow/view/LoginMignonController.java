@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
@@ -29,12 +30,16 @@ public class LoginMignonController {
 	@FXML
 	private PasswordField PassField;
 	@FXML
+	private Button LogInButton;
+	@FXML
+	private Button buttonI;
+	@FXML
 	private ImageView bannerImageLogin;
-	private Stage lStage;
+	Stage lStage;
 
 	
-	private Stage dialogStageIn;
-	private boolean ok;
+	Stage dialogStageIn;
+	boolean ok;
 	private Scene rettiffica;
 
 	
