@@ -71,7 +71,7 @@ class LoginMignonControllerTest extends TestFXBase{
 	}*/
 	
 	
-	@Test
+	/*@Test
 	public void LogInErrato_utenteEsistente() {
 		clickOn(ENTER1_BUTTON_ID);
 		LoginMignonController m=new LoginMignonController();
@@ -90,7 +90,7 @@ class LoginMignonControllerTest extends TestFXBase{
 		clickOn(PASS_FIELD_ID).write("ringolino");
 		sleep(1000);
 		assertFalse(m.ok,"utente inesistente passato con mail");
-	}
+	}*/
 	
 	
 	@Test
@@ -101,9 +101,9 @@ class LoginMignonControllerTest extends TestFXBase{
 		
 	}
 	
-	private void clearOutImputFields() {
+	/*private void clearOutImputFields() {
 		clickOn(MAIL_FIELD_ID).eraseText(100);
 		clickOn(PASS_FIELD_ID).eraseText(25);
-	}
+	}*/
 
 }

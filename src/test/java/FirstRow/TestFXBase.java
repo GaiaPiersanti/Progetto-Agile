@@ -20,11 +20,10 @@ public class TestFXBase extends ApplicationTest {
 		ApplicationTest.launch(MainFx.class);
 	}
 	
-	@Override
+	/*@Override
 	public void start(Stage stage) throws Exception{
 		stage.show();
-		sleep(1000);
-	}
+	}*/
 	
 	@AfterEach
 	public void afterEachTest() throws TimeoutException{

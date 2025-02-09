@@ -24,7 +24,7 @@ public class MainFx extends Application {
 		controller.setStage(primaryStage);
 
 
-		Scene scenaI = new Scene(rootPI, 700, 500); 
+		Scene scenaI = new Scene(rootPI, 700, 500);
 		primaryStage.setTitle("Pianificator");
 		primaryStage.setScene(scenaI);
 		primaryStage.setMaxWidth(700);
