@@ -186,7 +186,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.0</version>
         <configuration>
-          <mainClass>FirstRow.App</mainClass>
+          <mainClass>FirstRow.MainFx</mainClass>
         </configuration>
       </plugin>
       

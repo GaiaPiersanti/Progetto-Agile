@@ -6,6 +6,7 @@ import FirstRow.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
@@ -54,17 +55,22 @@ public class PaginaIController {
   	  }
 
         @FXML
-		public void registrazione(ActionEvent event){
+		public void registrazione(ActionEvent event) throws Exception{
 			System.out.println("ok");
-			try {
-					Database.connection(pInput.getText(), emailInput.getText(),uInput.getText(), null);
-	
-				}
-	
-	
-			catch (Exception e) {
-	
-				}
+			
+				Boolean registrazioneOk = Database.connection(pInput.getText(), emailInput.getText(),uInput.getText(), null);
+
+                if(registrazioneOk){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Dashboard.fxml"));
+                    Parent dashboardRoot = loader.load();
+                    Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                    Scene dashboardScene = new Scene(dashboardRoot, 1000, 700); // Imposta le dimensioni che preferisci
+                    stage.setScene(dashboardScene);
+                    stage.setMinWidth(1000);
+                    stage.setMinHeight(800);
+                    stage.show();
+                }
+				
 		}
     
 }
