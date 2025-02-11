@@ -3,7 +3,6 @@ package FirstRow.view;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,8 +30,6 @@ public class LoginMignonController {
 	private PasswordField PassField;
 	@FXML
 	private Button LogInButton;
-	@FXML
-	private Button buttonI;
 	@FXML
 	private ImageView bannerImageLogin;
 	Stage lStage;

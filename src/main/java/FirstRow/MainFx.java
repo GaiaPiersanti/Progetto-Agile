@@ -2,6 +2,7 @@ package FirstRow;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 import FirstRow.view.PaginaIController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,7 @@ public class MainFx extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-	
+			
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("view/PaginaIniziale.fxml"));
 		Parent rootPI = loader.load();
 

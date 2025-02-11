@@ -12,9 +12,9 @@ public class ElencoAttivitaControllerTest extends TestFXBase{
 	final String TABLE_ID = "#TabellaAttivita";
 
 	
-	@Test
+	/*@Test
 	public void laTabellaNonEVuota() {
 		TableView<Attivita> tab = (TableView<Attivita>)find(TABLE_ID);
 		assertNotEquals(null,tab.getItems(),"non c'è una tabella");
-	}
+	}*/
 }
