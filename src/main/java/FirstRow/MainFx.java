@@ -2,7 +2,6 @@ package FirstRow;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import FirstRow.view.DashboardController;
 import FirstRow.view.PaginaIController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

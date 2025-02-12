@@ -7,7 +7,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 public class DashboardController {
     @FXML
@@ -24,12 +23,7 @@ public class DashboardController {
     private TextField emailInput;
     @FXML
     private TextField uInput;
-    private Stage stage;
 
-
-    public void setStage(Stage primaryStage) {
-        this.stage = primaryStage;
-    }
  
     @FXML
     public void initialize(){
