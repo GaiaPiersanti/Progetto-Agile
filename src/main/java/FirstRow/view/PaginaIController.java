@@ -44,7 +44,7 @@ public class PaginaIController {
     
     @FXML
 	public void loginBox(MouseEvent event) throws IOException{
-        
+        	
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/loginMignon.fxml"));
         Parent rootLogin = loader.load();
         LoginMignonController loginController = loader.getController();

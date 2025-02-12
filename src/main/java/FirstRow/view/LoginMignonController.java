@@ -3,10 +3,11 @@ package FirstRow.view;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import FirstRow.Database;
 import FirstRow.MainFx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
@@ -27,12 +29,14 @@ public class LoginMignonController {
 	@FXML
 	private PasswordField PassField;
 	@FXML
+	private Button LogInButton;
+	@FXML
 	private ImageView bannerImageLogin;
-	private Stage lStage;
+	Stage lStage;
 
 	
-	private Stage dialogStageIn;
-	private boolean ok;
+	Stage dialogStageIn;
+	boolean ok;
 	private Scene rettiffica;
 
 	
@@ -114,6 +118,27 @@ public class LoginMignonController {
 
 		if(ok) {
 			dialogStageIn.close();
+			try {
+				// Load the fxml file and create a new stage for the popup dialog.
+					FXMLLoader loader = new FXMLLoader();
+			        loader.setLocation(MainFx.class.getResource("view/ElencoAttivita.fxml"));
+			        Parent page = loader.load();
+
+
+			        // Create the dialog Stage.
+			        Stage dialogStage = new Stage();
+			        dialogStage.setTitle("Elenco Attività");
+			        Scene scene = new Scene(page);
+			        dialogStage.setScene(scene);
+
+			    	// Set the person into the controller.
+			        ElencoAttivitaController controller = loader.getController();
+			    	controller.setDialogStage(dialogStage);
+			    	dialogStage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		}
 	}
 	
@@ -122,7 +147,7 @@ public class LoginMignonController {
 	 boolean utenteEsistente(String x, String y) {
 		boolean res=false;
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/AgileDB","root","MaicholZed01.");
+			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM utenti WHERE email='"+x+"'AND pass='"+y+"' or username='"+x+"' AND pass='"+y+"'");
 			

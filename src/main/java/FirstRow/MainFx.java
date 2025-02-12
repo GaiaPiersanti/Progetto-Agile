@@ -16,7 +16,7 @@ public class MainFx extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-	
+			
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("view/PaginaIniziale.fxml"));
 		Parent rootPI = loader.load();
 
@@ -24,7 +24,7 @@ public class MainFx extends Application {
 		controller.setStage(primaryStage);
 
 
-		Scene scenaI = new Scene(rootPI, 700, 500); 
+		Scene scenaI = new Scene(rootPI, 700, 500);
 		primaryStage.setTitle("Pianificator");
 		primaryStage.setScene(scenaI);
 		primaryStage.show();
