@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -147,27 +148,30 @@ public class ElencoAttivitaController implements Initializable {
 	}
 
 	public void aggiornaAttivita(Attivita attivitaVecchia, Attivita attivitaNuova) {
-		TabellaAttivita.getItems().remove(attivitaVecchia);
-		TabellaAttivita.getItems().add(attivitaNuova);
-		
-		aggiornaAttivitaNelDatabase(attivitaVecchia, attivitaNuova);
+		attivitaVecchia.setNome(attivitaNuova.getNome());
+		attivitaVecchia.setCategoria(attivitaNuova.getCategoria());
+		attivitaVecchia.setScadenza(attivitaNuova.getScadenza());
+		attivitaVecchia.setPriorita(attivitaNuova.getPriorita());
+
+		// Aggiorna la visualizzazione della tabella
+		TabellaAttivita.refresh();
+
+		// Aggiorna anche nel database
+		aggiornaAttivitaNelDatabase(attivitaVecchia);
 	}
 	
-	private void aggiornaAttivitaNelDatabase(Attivita attivitaVecchia, Attivita attivitaNuova) {
-		String query = "UPDATE attivita SET nome = ?, categoria = ?, scadenza = ?, priorita = ? WHERE nome = ? AND categoria = ? AND scadenza = ? AND priorita = ?";
-		
+	private void aggiornaAttivitaNelDatabase(Attivita attivita) {
+		String query = "UPDATE attivita SET nome = ?, categoria = ?, scadenza = ?, priorita = ? WHERE nome = ?";
+
 		try (Connection con = Database.collegamento();
 			 PreparedStatement stmt = con.prepareStatement(query)) {
-			
-			stmt.setString(1, attivitaNuova.getNome());
-			stmt.setString(2, attivitaNuova.getCategoria());
-			stmt.setString(3, attivitaNuova.getScadenza());
-			stmt.setString(4, attivitaNuova.getPriorita());
-			stmt.setString(5, attivitaVecchia.getNome());
-			stmt.setString(6, attivitaVecchia.getCategoria());
-			stmt.setString(7, attivitaVecchia.getScadenza());
-			stmt.setString(8, attivitaVecchia.getPriorita());
-			
+	
+			stmt.setString(1, attivita.getNome());
+			stmt.setString(2, attivita.getCategoria());
+			stmt.setString(3, attivita.getScadenza());
+			stmt.setString(4, attivita.getPriorita());
+			stmt.setString(5, attivita.getNome()); // Usa il vecchio nome per aggiornare
+	
 			stmt.executeUpdate();
 			System.out.println("Attività modificata con successo!");
 		} catch (SQLException e) {
@@ -219,12 +223,88 @@ public class ElencoAttivitaController implements Initializable {
 	
 	@FXML
 	private void handleRicercaAvanzata() {
-		//TO-DO inserire qui i comandi relativi alla ricerca avanzata delle attività
-	}
+		String filtro = SearchField.getText().trim();
 
-	public void aggiungiAttivitaAllaTabella(Attivita nuovaAttivita) {
+		// Se il campo di ricerca è vuoto, ricarica tutte le attività
+		if (filtro.isEmpty()) {
+			caricaTutteLeAttivita();
+						return;
+					}
+				
+					ObservableList<Attivita> risultatiRicerca = FXCollections.observableArrayList();
+					
+					String query = "SELECT nome, categoria, scadenza, priorita FROM attivita " +
+								   "WHERE LOWER(nome) LIKE ? OR LOWER(categoria) LIKE ? OR LOWER(priorita) LIKE ?";
+				
+					try (Connection con = Database.collegamento();
+						 PreparedStatement stmt = con.prepareStatement(query)) {
+						
+						// Imposta i parametri della query con il filtro in minuscolo per una ricerca case-insensitive
+						String filtroLike = "%" + filtro.toLowerCase() + "%";
+						stmt.setString(1, filtroLike);
+						stmt.setString(2, filtroLike);
+						stmt.setString(3, filtroLike);
+						
+						ResultSet rs = stmt.executeQuery();
+				
+						while (rs.next()) {
+							risultatiRicerca.add(new Attivita(
+								rs.getString("nome"),
+								rs.getString("categoria"),
+								rs.getString("scadenza"),
+								rs.getString("priorita")
+							));
+						}
+				
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						System.out.println("Errore nella ricerca delle attività!");
+					}
+				
+					// Aggiorna la TableView con i risultati della ricerca
+					TabellaAttivita.setItems(risultatiRicerca);
+				}
+			
+				private void caricaTutteLeAttivita() {
+					ObservableList<Attivita> list = FXCollections.observableArrayList();
+    
+					String query = "SELECT nome, categoria, scadenza, priorita FROM attivita";
+
+					try (Connection con = Database.collegamento();
+						Statement stmt = con.createStatement();
+						ResultSet rs = stmt.executeQuery(query)) {
+
+						while (rs.next()) {
+							list.add(new Attivita(
+								rs.getString("nome"),
+								rs.getString("categoria"),
+								rs.getString("scadenza"),
+								rs.getString("priorita")
+							));
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						System.out.println("Errore nel caricamento delle attività!");
+					}
+
+					// Aggiorna la TableView con tutti i dati
+					TabellaAttivita.setItems(list);
+				}
+			
+				public void aggiungiAttivitaAllaTabella(Attivita nuovaAttivita) {
 		
 		TabellaAttivita.getItems().add(nuovaAttivita);
 		
+	}
+
+	public void dashboard(MouseEvent event) throws IOException{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Dashboard.fxml"));
+		Parent root = loader.load();
+		DashboardController controller = loader.getController();
+		Stage stage = (Stage) TabellaAttivita.getScene().getWindow(); // Prendi lo Stage corrente
+		stage.setTitle("Dashboard");
+		stage.setScene(new Scene(root));
+		stage.show();
 	}
 }

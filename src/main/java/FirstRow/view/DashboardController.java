@@ -1,12 +1,20 @@
 package FirstRow.view;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class DashboardController {
     @FXML
@@ -23,8 +31,12 @@ public class DashboardController {
     private TextField emailInput;
     @FXML
     private TextField uInput;
+    private Stage stage;
 
- 
+    public void setStage(Stage primaryStage){
+        this.stage = primaryStage;
+    }
+
     @FXML
     public void initialize(){
         File bannerFile = new File("src/main/resources/Immagini/CasaIcona.png");
@@ -45,7 +57,15 @@ public class DashboardController {
         
     }
 
-
-
-    
+    public void elencoAttivita(MouseEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/ElencoAttivita.fxml"));
+        Parent root = loader.load();
+        
+        ElencoAttivitaController controller = loader.getController();
+        
+        Stage stage = (Stage) bannerImageIC.getScene().getWindow(); // Prendi lo Stage corrente
+        stage.setTitle("Elenco Attvità");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }    
 }
