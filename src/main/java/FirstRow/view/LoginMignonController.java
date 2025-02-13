@@ -82,8 +82,9 @@ public class LoginMignonController {
 		        	controller.setDialogStage(dialogStage);
 
 		        	// Show the dialog and wait until the user closes it
-		        	dialogStage.showAndWait();
 		        	ok = true;
+		        	dialogStage.showAndWait();
+		        	
 		    	} catch (IOException e) {
 		    		e.printStackTrace();
 		    	}
