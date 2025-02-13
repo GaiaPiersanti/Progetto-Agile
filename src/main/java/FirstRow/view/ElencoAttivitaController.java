@@ -169,7 +169,7 @@ public class ElencoAttivitaController implements Initializable {
 	
 			stmt.setString(1, attivita.getNome());
 			stmt.setString(2, attivita.getCategoria());
-			stmt.setString(3, attivita.getScadenza());
+			stmt.setDate(3, attivita.getScadenza());
 			stmt.setString(4, attivita.getPriorita());
 			stmt.setString(5, attivita.getNome()); // Usa il vecchio nome per aggiornare
 	
@@ -283,7 +283,7 @@ public class ElencoAttivitaController implements Initializable {
 							risultatiRicerca.add(new Attivita(
 								rs.getString("nome"),
 								rs.getString("categoria"),
-								rs.getString("scadenza"),
+								rs.getDate("scadenza"),
 								rs.getString("priorita")
 							));
 						}
@@ -311,7 +311,7 @@ public class ElencoAttivitaController implements Initializable {
 							list.add(new Attivita(
 								rs.getString("nome"),
 								rs.getString("categoria"),
-								rs.getString("scadenza"),
+								rs.getDate("scadenza"),
 								rs.getString("priorita")
 							));
 						}
