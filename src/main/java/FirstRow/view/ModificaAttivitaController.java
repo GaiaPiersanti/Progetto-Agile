@@ -1,5 +1,7 @@
 package FirstRow.view;
 
+import java.sql.Date;
+
 import FirstRow.Model.Attivita;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +29,7 @@ public class ModificaAttivitaController {
         this.attivitaSelezionata = selectedAttivita;
         nomeAttivita.setText(selectedAttivita.getNome());
         categoriaAttivita.setValue(selectedAttivita.getCategoria());
-        scadenzaAttivita.setValue(java.time.LocalDate.parse(selectedAttivita.getScadenza()));
+        scadenzaAttivita.setValue(java.time.LocalDate.parse(selectedAttivita.getScadenza().toString()));
         prioritaAttivita.setValue(selectedAttivita.getPriorita());
     }
 
@@ -47,7 +49,7 @@ public class ModificaAttivitaController {
             Attivita nuovaAttivita = new Attivita(
                 nomeAttivita.getText(),
                 categoriaAttivita.getValue(),
-                scadenzaAttivita.getValue().toString(),
+                Date.valueOf(scadenzaAttivita.getValue()),
                 prioritaAttivita.getValue()
             );
 

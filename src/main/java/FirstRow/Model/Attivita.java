@@ -1,13 +1,15 @@
 package FirstRow.Model;
 
+import java.sql.Date;
+
 public class Attivita {
 
 	private String nome;
 	private String categoria;
-	private String scadenza;
+	private Date scadenza;
 	private String priorita;
 	
-	public Attivita(String nome,String categoria, String scadenza, String priorita ) {
+	public Attivita(String nome,String categoria, Date scadenza, String priorita ) {
 		this.nome = nome;
 		this.categoria = categoria;
 		this.scadenza = scadenza;
@@ -20,7 +22,7 @@ public class Attivita {
 	public String getCategoria() {
 		return this.categoria;
 	}
-	public String getScadenza() {
+	public Date getScadenza() {
 		return this.scadenza;
 	}
 	public String getPriorita() {
@@ -35,7 +37,7 @@ public class Attivita {
 		this.categoria = categoria;
 	}
 
-	public void setScadenza(String scadenza) {
+	public void setScadenza(Date scadenza) {
 		this.scadenza = scadenza;
 	}
 
