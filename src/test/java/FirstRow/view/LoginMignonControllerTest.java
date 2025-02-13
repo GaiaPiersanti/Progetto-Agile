@@ -15,13 +15,18 @@ import org.junit.jupiter.api.Test;
 import org.testfx.api.FxRobotException;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
 
 import FirstRow.Database;
 import FirstRow.MainFx;
 import FirstRow.TestFXBase;
 import FirstRow.view.LoginMignonController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
 
 class LoginMignonControllerTest extends TestFXBase{
 	int exist1=0, exist2=0;
@@ -29,8 +34,10 @@ class LoginMignonControllerTest extends TestFXBase{
 	final String PASS_FIELD_ID = "#PassField";
 	final String LOG_IN_BUTTON_ID = "#LogInButton";
 	final String RETURN_BUTTON_ID = "#buttonI";
-	final String ENTER1_BUTTON_ID = "#buttonLogin";
-	
+	final String INS_BUTTON_ID = "#Button1";
+	final String SUC_BUTTON_ID = "#bottone";
+
+	LoginMignonController loginController;
 	
 	@BeforeEach
 	void setUp() {
@@ -63,47 +70,74 @@ class LoginMignonControllerTest extends TestFXBase{
 		}
 
 	}
+	
+	@Override
+	public void start(Stage stage) throws Exception{
+		 FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/loginMignon.fxml"));
+	     Parent rootLogin = loader.load();
+	     loginController = loader.getController();
+	     loginController.setStage(stage);
+	     Scene scenaLogin = new Scene(rootLogin, 700, 500);
+	     stage.setScene(scenaLogin);
+	     stage.show();
+	}
 
 	
-	/*@Test
+	@Test
 	public void clickOnBogusElement() {
 		assertThrows(FxRobotException.class,()->{clickOn("#slkdjfkasd");},"mi ha cliccato un pulsante inesistente");
-	}*/
-	
-	
-	/*@Test
-	public void LogInErrato_utenteEsistente() {
-		clickOn(ENTER1_BUTTON_ID);
-		LoginMignonController m=new LoginMignonController();
-		clearOutImputFields();
-		clickOn(MAIL_FIELD_ID).write("Mino");
-		clickOn(PASS_FIELD_ID).write("");
-		sleep(1000);
-		assertFalse(m.ok,"controllo su passwoard inesistente");
-		clearOutImputFields();
-		clickOn(MAIL_FIELD_ID).write("gino");
-		clickOn(PASS_FIELD_ID).write("ringolino");
-		sleep(1000);
-		assertFalse(m.ok,"utente inesistente passato con username");
-		clearOutImputFields();
-		clickOn(MAIL_FIELD_ID).write("giorgino2@gmail.com");
-		clickOn(PASS_FIELD_ID).write("ringolino");
-		sleep(1000);
-		assertFalse(m.ok,"utente inesistente passato con mail");
-	}*/
+	}
 	
 	
 	@Test
-	void controlloDiLogin_utenteEsistente() {
-		LoginMignonController m=new LoginMignonController();
-		assertTrue(m.utenteEsistente("Mino","Tauro"));
-		assertTrue(m.utenteEsistente("Dedalo@gmail.com","Tauro"));
+	public void LogInErrato_utenteEsistente() {
+		LoginMignonController m = loginController;
+		clearOutImputFields(0,0);
+		clickOn(MAIL_FIELD_ID).write("Mino");
+		clickOn(PASS_FIELD_ID).write("");
+		clickOn(LOG_IN_BUTTON_ID);
+		clickOn(INS_BUTTON_ID);
+		sleep(100);
+		//clickOn(INS_BUTTON_ID);
+		assertFalse(m.ok,"controllo su passwoard inesistente");
+		clearOutImputFields("Mino".length(),"".length());
+		clickOn(MAIL_FIELD_ID).write("gino");
+		clickOn(PASS_FIELD_ID).write("ringolino");
+		clickOn(LOG_IN_BUTTON_ID);
+		sleep(100);
+		clickOn(INS_BUTTON_ID);
+		assertFalse(m.ok,"utente inesistente passato con username");
+		clearOutImputFields("gino".length(),"ringolino".length());
+		clickOn(MAIL_FIELD_ID).write("giorgino2@gmail.com");
+		clickOn(PASS_FIELD_ID).write("ringolino");
+		clickOn(LOG_IN_BUTTON_ID);
+		sleep(100);
+		clickOn(INS_BUTTON_ID);
+		assertFalse(m.ok,"utente inesistente passato con mail");
+	}
+	
+	
+	@Test
+	void LogInCorretto_utenteEsistente() {
+		LoginMignonController m = loginController;
+		clearOutImputFields(0,0);
+		clickOn(MAIL_FIELD_ID).write("Mino");
+		clickOn(PASS_FIELD_ID).write("Tauro");
+		clickOn(LOG_IN_BUTTON_ID);
+		WaitForAsyncUtils.waitForFxEvents();
+		assertTrue(m.ok,"non è entrato nikname e password giuste");
+		clearOutImputFields("Mino".length(),"Tauro".length());
+		clickOn(MAIL_FIELD_ID).write("Dedalo@gmail.com");
+		clickOn(PASS_FIELD_ID).write("Tauro");
+		clickOn(LOG_IN_BUTTON_ID);
+		WaitForAsyncUtils.waitForFxEvents();
+		assertTrue(m.ok,"non è entrato email e password giuste");
 		
 	}
 	
-	/*private void clearOutImputFields() {
-		clickOn(MAIL_FIELD_ID).eraseText(100);
-		clickOn(PASS_FIELD_ID).eraseText(25);
-	}*/
+	private void clearOutImputFields(int x,int y) {
+		clickOn(MAIL_FIELD_ID).eraseText(x);
+		clickOn(PASS_FIELD_ID).eraseText(y);
+	}
 
 }

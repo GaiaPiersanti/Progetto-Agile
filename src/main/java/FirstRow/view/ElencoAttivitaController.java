@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +39,7 @@ public class ElencoAttivitaController implements Initializable {
 	@FXML
 	private TableColumn<Attivita,String> ColCategoria;
 	@FXML
-	private TableColumn<Attivita,String> ColScadenza;
+	private TableColumn<Attivita,Date> ColScadenza;
 	@FXML
 	private TableColumn<Attivita,String> ColPriorita;
 	@FXML
@@ -75,7 +76,7 @@ public class ElencoAttivitaController implements Initializable {
         
         ColNome.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Nome"));
         ColCategoria.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Categoria"));
-        ColScadenza.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Scadenza"));
+        ColScadenza.setCellValueFactory(new PropertyValueFactory<Attivita,Date>("Scadenza"));
         ColPriorita.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Priorita"));
         
 		Connection con = Database.collegamento();
@@ -87,9 +88,9 @@ public class ElencoAttivitaController implements Initializable {
 		Statement stmt = con.createStatement();
 		ResultSet rs;
 		
-			rs = stmt.executeQuery("SELECT nome,categoria,scadenza,priorita FROM attivita");
+			rs = stmt.executeQuery("SELECT nome,categoria,scadenza,priorita FROM attivita WHERE completato = 0");
 			while(rs.next()) {
-				list.add(new Attivita(rs.getString("nome"),rs.getString("categoria"),rs.getString("scadenza"),rs.getString("priorita")));
+				list.add(new Attivita(rs.getString("nome"),rs.getString("categoria"),rs.getDate("scadenza"),rs.getString("priorita")));
 			}
 			rs.close();
 			stmt.close();
@@ -196,6 +197,37 @@ public class ElencoAttivitaController implements Initializable {
 		}
 
 		}
+	@FXML
+	private void handleComleta() {
+		Attivita selectedAttivita = TabellaAttivita.getSelectionModel().getSelectedItem();
+
+		if (selectedAttivita != null) {
+			// Rimuovi dalla TableView
+			TabellaAttivita.getItems().remove(selectedAttivita);
+			
+			// aggiorna nel database
+			String query = "UPDATE attivita SET completato = ? WHERE nome = ? AND categoria = ? AND scadenza = ? AND priorita = ?";
+			
+			try (Connection con = Database.collegamento();
+				 PreparedStatement stmt = con.prepareStatement(query)) {
+				
+				stmt.setBoolean(1, true);
+				stmt.setString(2, selectedAttivita.getNome());
+				stmt.setString(3, selectedAttivita.getCategoria());
+				stmt.setDate(4, selectedAttivita.getScadenza());
+				stmt.setString(5, selectedAttivita.getPriorita());
+				
+				stmt.executeUpdate();
+				System.out.println("Attività segnata come completatà con successo!");
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Errore nella modifica dell'attività!");
+			}
+		} else {
+			System.out.println("Errore: Nessuna attività selezionata!");
+		}
+
+		}
 
 		private void eliminaAttivitaDalDatabase(Attivita attivita) {
    	 		String query = "DELETE FROM attivita WHERE nome = ? AND categoria = ? AND scadenza = ? AND priorita = ?";
@@ -205,7 +237,7 @@ public class ElencoAttivitaController implements Initializable {
 				
 				stmt.setString(1, attivita.getNome());
 				stmt.setString(2, attivita.getCategoria());
-				stmt.setString(3, attivita.getScadenza());
+				stmt.setDate(3, attivita.getScadenza());
 				stmt.setString(4, attivita.getPriorita());
 				
 				stmt.executeUpdate();

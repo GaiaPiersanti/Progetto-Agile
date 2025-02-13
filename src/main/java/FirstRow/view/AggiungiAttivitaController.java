@@ -1,8 +1,10 @@
 package FirstRow.view;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import FirstRow.Database;
 import FirstRow.Model.Attivita;
@@ -48,10 +50,10 @@ public class AggiungiAttivitaController {
 
         String nome = nomeAttivita.getText();
         String categoria = categoriaAttivita.getValue();
-        String scadenza = (scadenzaAttivita.getValue() != null) ? scadenzaAttivita.getValue().toString() : "";
+        Date scadenza = (scadenzaAttivita.getValue() != null) ? Date.valueOf(scadenzaAttivita.getValue()) : Date.valueOf(LocalDate.now());
         String priorita = prioritaAttivita.getValue();
 
-        if (nome.isEmpty() || categoria == null || scadenza.isEmpty() || priorita == null) {
+        if (nome.isEmpty() || categoria == null || ((CharSequence) scadenza).isEmpty() || priorita == null) {
             System.out.println("Errore: tutti i campi devono essere compilati!");
             return;
         }
@@ -77,7 +79,7 @@ public class AggiungiAttivitaController {
             PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, attivita.getNome());
             stmt.setString(2, attivita.getCategoria());
-            stmt.setString(3, attivita.getScadenza());
+            stmt.setDate(3, attivita.getScadenza());
             stmt.setString(4, attivita.getPriorita());
             stmt.executeUpdate();
             return true;

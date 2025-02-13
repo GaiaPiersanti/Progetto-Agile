@@ -19,10 +19,6 @@ public class TestFXBase extends ApplicationTest {
 		ApplicationTest.launch(MainFx.class);
 	}
 	
-	/*@Override
-	public void start(Stage stage) throws Exception{
-		stage.show();
-	}*/
 	
 	@After
 	public void afterEachTest() throws TimeoutException{
