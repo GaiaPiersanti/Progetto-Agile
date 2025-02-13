@@ -14,7 +14,6 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="parent" stylesheets="@Stylesheets.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstRow.view.DashboardController">
    <left>
       <AnchorPane prefHeight="700.0" prefWidth="60.0" styleClass="parent" stylesheets="@sideBar.css" BorderPane.alignment="CENTER">
@@ -29,7 +28,7 @@
                   <Image url="@../../../resources/Immagini/CasaIcona.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bannerImageIE" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bannerImageIE" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="220.0" onMouseClicked="#elencoAttivita" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/Immagini/IconaLista.png" />
                </image>

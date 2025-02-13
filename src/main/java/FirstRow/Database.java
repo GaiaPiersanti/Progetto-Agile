@@ -99,7 +99,7 @@ public class Database {
     public static Connection collegamento() {
     	Connection x = null;
     	try {
-			x = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/firstrow", "root", "Higdrasil1!34"); //michele ("jdbc:mysql://localhost:3306/AgileDB", "root", "MaicholZed01."), armando("jdbc:mysql://127.0.0.1:3306/firstrow", "root", "Higdrasil1!34")
+			x = DriverManager.getConnection("jdbc:mysql://localhost:3306/AgileDB", "root", "MaicholZed01."); //michele ("jdbc:mysql://localhost:3306/AgileDB", "root", "MaicholZed01."), armando("jdbc:mysql://127.0.0.1:3306/firstrow", "root", "Higdrasil1!34")
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

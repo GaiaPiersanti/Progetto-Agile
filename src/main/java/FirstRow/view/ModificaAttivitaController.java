@@ -43,6 +43,13 @@ public class ModificaAttivitaController {
         this.stage = stage;
     }
 
+    public void initialize(){
+        categoriaAttivita.getItems().addAll("Lavoro", "Studio", "Casa");
+        prioritaAttivita.getItems().addAll("Alta", "Media", "Bassa");
+
+    }
+
+
     @FXML
     private void handleSalvaModifiche(ActionEvent event) {
         if (attivitaSelezionata != null) {

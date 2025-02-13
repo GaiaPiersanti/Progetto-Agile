@@ -24,7 +24,7 @@
                   <Image url="@../../../resources/Immagini/IconaProfilo.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bannerImageIC" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bannerImageIC" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="275.0" onMouseClicked="#dashboard" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/Immagini/CasaIcona.png" />
                </image>
