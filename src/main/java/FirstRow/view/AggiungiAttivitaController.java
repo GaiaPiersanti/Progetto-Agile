@@ -53,7 +53,7 @@ public class AggiungiAttivitaController {
         Date scadenza = (scadenzaAttivita.getValue() != null) ? Date.valueOf(scadenzaAttivita.getValue()) : Date.valueOf(LocalDate.now());
         String priorita = prioritaAttivita.getValue();
 
-        if (nome.isEmpty() || categoria == null || ((CharSequence) scadenza).isEmpty() || priorita == null) {
+        if (nome.isEmpty() || categoria == null || scadenza == null|| priorita == null) {
             System.out.println("Errore: tutti i campi devono essere compilati!");
             return;
         }
