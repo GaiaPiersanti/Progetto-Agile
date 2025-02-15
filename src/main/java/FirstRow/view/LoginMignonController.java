@@ -183,4 +183,16 @@ public class LoginMignonController {
 			e.printStackTrace();
 		}
 	}
+    
+	//link alla pagina di reset pw
+	@FXML
+	private void resetLink() throws IOException{
+		FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("view/ResetPassword.fxml"));
+    	Parent paginaIniziale = loader.load();
+		ResetPasswordController resetPasswordController = loader.getController();
+    	resetPasswordController.setStage(lStage); 
+		Scene sBack = new Scene(paginaIniziale);
+		lStage.setScene(sBack);
+
+	}
 }
