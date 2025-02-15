@@ -193,6 +193,7 @@ public class LoginMignonController {
     	resetPasswordController.setStage(lStage); 
 		Scene sBack = new Scene(paginaIniziale);
 		lStage.setScene(sBack);
+		//lStage.show();
 
 	}
 }

@@ -40,20 +40,22 @@ public class ResetPasswordController {
     private Label MessaggioErrore;
 
     @FXML
-	private ImageView bannerImageLogin;
+	private ImageView bannerImageRegistrazione;
 
     Stage ResetStage;
 
     public void setStage(Stage primaryStage) {
         this.ResetStage = primaryStage;
     }
- 
+    
     //prende l'immagine verde a dx e la carica (metodo lanciato sempre prima che compare lo stage)
     @FXML
     private void initialize() {
+        
 		File bannerFile = new File("src/main/resources/Immagini/Banner.png");
 		Image banner = new Image(bannerFile.toURI().toString());
-		bannerImageLogin.setImage(banner);
+		bannerImageRegistrazione.setImage(banner);
+        
 			
     }
 
@@ -101,6 +103,7 @@ public class ResetPasswordController {
 
                 stmt.setString(1, newPassword);
                 stmt.setString(2, email);
+                stmt.executeUpdate();
 
         } catch (SQLException e) {
 			e.printStackTrace();
