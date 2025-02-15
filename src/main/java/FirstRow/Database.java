@@ -41,7 +41,6 @@ public class Database {
 
     public static boolean connection(String pInput, String email, String usernameI, Connection con) throws Exception{
 
-        
         PreparedStatement st = null;
         PreparedStatement checkEmailStmt = null;
         ResultSet rs = null;
@@ -96,8 +95,8 @@ public class Database {
 
     public static Connection collegamento() {
     	Connection x = null;
-    	try {
-			x = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/firstrow", "root", "Higdrasil1!34"); //michele ("jdbc:mysql://localhost:3306/AgileDB", "root", "MaicholZed01."), armando("jdbc:mysql://127.0.0.1:3306/firstrow", "root", "Higdrasil1!34")
+    	try { //jdbc:mysql://127.0.0.1:3306/?user=root  
+ 			x = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/AgileDB", "root", "password"); //michele ("jdbc:mysql://localhost:3306/AgileDB", "root", "MaicholZed01."), armando("jdbc:mysql://127.0.0.1:3306/firstrow", "root", "Higdrasil1!34")
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
