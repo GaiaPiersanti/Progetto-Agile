@@ -25,7 +25,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
+
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.CalendarSource;
+import com.calendarfx.model.Calendar.Style;
+import com.calendarfx.view.CalendarView;
 
 import FirstRow.Database;
 import FirstRow.Model.Attivita;
@@ -334,9 +340,27 @@ public class ElencoAttivitaController implements Initializable {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Dashboard.fxml"));
 		Parent root = loader.load();
 		DashboardController controller = loader.getController();
+		controller.setStage(StageIn);
 		Stage stage = (Stage) TabellaAttivita.getScene().getWindow(); // Prendi lo Stage corrente
 		stage.setTitle("Dashboard");
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
+	
+	public void Calendario(MouseEvent event) throws IOException{
+    	CalendarView calendarView = new CalendarView();
+    	Calendar birthdays = new Calendar("Birthdays");
+    	birthdays.setStyle(Style.STYLE1);
+    	CalendarSource myCalendarSource = new CalendarSource("My Calendars");
+        myCalendarSource.getCalendars().addAll(birthdays);
+        calendarView.getCalendarSources().addAll(myCalendarSource);
+        calendarView.setRequestedTime(LocalTime.now());
+        Scene scene = new Scene(calendarView);
+        StageIn.setTitle("Calendar");
+        StageIn.setScene(scene);
+        StageIn.setWidth(1300);
+        StageIn.setHeight(1000);
+        StageIn.centerOnScreen();
+        StageIn.show();
+    }
 }

@@ -2,7 +2,14 @@ package FirstRow.view;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalTime;
 
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Calendar.Style;
+import com.calendarfx.model.CalendarSource;
+import com.calendarfx.view.CalendarView;
+
+import FirstRow.Model.Attivita;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
@@ -62,10 +69,22 @@ public class DashboardController {
         Parent root = loader.load();
         
         ElencoAttivitaController controller = loader.getController();
+        controller.setDialogStage(stage);
         
         Stage stage = (Stage) bannerImageIC.getScene().getWindow(); // Prendi lo Stage corrente
         stage.setTitle("Elenco Attvità");
         stage.setScene(new Scene(root));
         stage.show();
-    }    
+    }
+    
+    public void Calendario(MouseEvent event) throws IOException{
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Calendar.fxml"));
+        Parent root = loader.load();
+        
+        CalendarController controller = loader.getController();
+        controller.setStage(stage);
+        stage.setTitle("Calendar");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }
