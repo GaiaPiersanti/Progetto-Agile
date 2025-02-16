@@ -72,6 +72,13 @@
     	<version>4.0.18</version>
     	<scope>test</scope>
 	</dependency>
+	
+	<!-- claendarFx Dependencys -->
+	<dependency>
+    	<groupId>com.calendarfx</groupId>
+    	<artifactId>view</artifactId>
+    	<version>11.12.7</version>
+	</dependency>
 
 <!-- non so cosa siano viene dal marasma di michele-->
 <dependency>

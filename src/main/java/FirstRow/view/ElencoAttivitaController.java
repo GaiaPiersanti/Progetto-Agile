@@ -25,9 +25,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.CalendarSource;
+import com.calendarfx.model.Calendar.Style;
+import com.calendarfx.view.CalendarView;
+
 import FirstRow.Database;
+import FirstRow.MainFx;
 import FirstRow.Model.Attivita;
 
 public class ElencoAttivitaController implements Initializable {
@@ -334,9 +341,21 @@ public class ElencoAttivitaController implements Initializable {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Dashboard.fxml"));
 		Parent root = loader.load();
 		DashboardController controller = loader.getController();
+		controller.setStage(StageIn);
 		Stage stage = (Stage) TabellaAttivita.getScene().getWindow(); // Prendi lo Stage corrente
 		stage.setTitle("Dashboard");
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
+	
+	public void Calendario(MouseEvent event) throws IOException{
+    	FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("/FirstRow/view/Calendar.fxml"));
+        Parent root = loader.load();
+        
+        CalendarController controller = loader.getController();
+        controller.setStage(StageIn);
+        StageIn.setTitle("Calendar");
+        StageIn.setScene(new Scene(root));
+        StageIn.show();
+    }
 }
