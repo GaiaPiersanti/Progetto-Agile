@@ -34,6 +34,7 @@ import com.calendarfx.model.Calendar.Style;
 import com.calendarfx.view.CalendarView;
 
 import FirstRow.Database;
+import FirstRow.MainFx;
 import FirstRow.Model.Attivita;
 
 public class ElencoAttivitaController implements Initializable {
@@ -348,19 +349,13 @@ public class ElencoAttivitaController implements Initializable {
 	}
 	
 	public void Calendario(MouseEvent event) throws IOException{
-    	CalendarView calendarView = new CalendarView();
-    	Calendar birthdays = new Calendar("Birthdays");
-    	birthdays.setStyle(Style.STYLE1);
-    	CalendarSource myCalendarSource = new CalendarSource("My Calendars");
-        myCalendarSource.getCalendars().addAll(birthdays);
-        calendarView.getCalendarSources().addAll(myCalendarSource);
-        calendarView.setRequestedTime(LocalTime.now());
-        Scene scene = new Scene(calendarView);
+    	FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("/FirstRow/view/Calendar.fxml"));
+        Parent root = loader.load();
+        
+        CalendarController controller = loader.getController();
+        controller.setStage(StageIn);
         StageIn.setTitle("Calendar");
-        StageIn.setScene(scene);
-        StageIn.setWidth(1300);
-        StageIn.setHeight(1000);
-        StageIn.centerOnScreen();
+        StageIn.setScene(new Scene(root));
         StageIn.show();
     }
 }
