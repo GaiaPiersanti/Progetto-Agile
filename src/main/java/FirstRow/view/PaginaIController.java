@@ -64,6 +64,8 @@ public class PaginaIController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Dashboard.fxml"));
                     Parent dashboardRoot = loader.load();
                     Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                    DashboardController dashController = loader.getController();
+                    dashController.setStage(this.stage);
                     Scene dashboardScene = new Scene(dashboardRoot, 1000, 700); // Imposta le dimensioni che preferisci
                     stage.setScene(dashboardScene);
                     stage.setMinWidth(1000);

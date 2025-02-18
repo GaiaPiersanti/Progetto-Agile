@@ -152,4 +152,9 @@ public class CalendarController {
 		Stage.setScene(new Scene(root));
 		Stage.show();
 	}
+
+    public void setDialogStage(Stage stage2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setDialogStage'");
+    }
 }

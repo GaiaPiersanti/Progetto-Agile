@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="430.0" prefWidth="458.0" styleClass="parent" stylesheets="@Stylesheets.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstRow.view.AggiungiAttivitaController">
+<AnchorPane prefHeight="510.0" prefWidth="532.0" styleClass="parent" stylesheets="@Stylesheets.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstRow.view.AggiungiAttivitaController">
    <children>
       <AnchorPane layoutX="-6.0" layoutY="-3.0" prefHeight="83.0" prefWidth="538.0" styleClass="parent" stylesheets="@sideBar.css" />
       <Label layoutX="175.0" layoutY="13.0" text="Aggiungi Attività">
@@ -66,7 +66,7 @@
                </color>
             </InnerShadow>
          </effect></ChoiceBox>
-      <Label layoutX="54.0" layoutY="331.0" text="Scadenza attività">
+      <Label layoutX="54.0" layoutY="401.0" text="Scadenza attività">
          <font>
             <Font name="Jaini Regular" size="18.0" />
          </font>
@@ -78,7 +78,7 @@
             </DropShadow>
          </effect>
       </Label>
-      <DatePicker fx:id="scadenzaAttivita" layoutX="180.0" layoutY="320.0" prefHeight="48.0" prefWidth="241.0" styleClass="parent" stylesheets="@box.css">
+      <DatePicker fx:id="scadenzaAttivita" layoutX="180.0" layoutY="390.0" prefHeight="48.0" prefWidth="241.0" styleClass="parent" stylesheets="@box.css">
          <effect>
             <InnerShadow>
                <color>
@@ -86,7 +86,7 @@
                </color>
             </InnerShadow>
          </effect></DatePicker>
-      <Label layoutX="117.0" layoutY="261.0" text="Priorità">
+      <Label layoutX="117.0" layoutY="331.0" text="Priorità">
          <font>
             <Font name="Jaini Regular" size="18.0" />
          </font>
@@ -98,7 +98,7 @@
             </DropShadow>
          </effect>
       </Label>
-      <ChoiceBox fx:id="prioritaAttivita" layoutX="180.0" layoutY="250.0" prefHeight="48.0" prefWidth="241.0" styleClass="pane" stylesheets="@Stylesheets.css">
+      <ChoiceBox fx:id="prioritaAttivita" layoutX="180.0" layoutY="320.0" prefHeight="48.0" prefWidth="241.0" styleClass="pane" stylesheets="@Stylesheets.css">
          <effect>
             <InnerShadow>
                <color>
@@ -106,7 +106,7 @@
                </color>
             </InnerShadow>
          </effect></ChoiceBox>
-      <Button layoutX="345.0" layoutY="388.0" mnemonicParsing="false" onAction="#aggiungi" prefHeight="23.0" prefWidth="77.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Aggiungi">
+      <Button layoutX="345.0" layoutY="458.0" mnemonicParsing="false" onAction="#aggiungi" prefHeight="23.0" prefWidth="77.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Aggiungi">
          <effect>
             <DropShadow>
                <color>
@@ -118,5 +118,26 @@
             <Font name="Jaini Regular" size="13.0" />
          </font>
       </Button>
+      <TextField fx:id="nuovaCategoria" layoutX="180.0" layoutY="250.0" prefHeight="48.0" prefWidth="241.0" styleClass="pane" stylesheets="@box.css">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.6823529601097107" green="0.6823529601097107" blue="0.6823529601097107" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </TextField>
+      <Label layoutX="64.0" layoutY="261.0" text="Nuova Categoria">
+         <font>
+            <Font name="Jaini Regular" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.6578947305679321" green="0.6578947305679321" blue="0.6578947305679321" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
    </children>
 </AnchorPane>
