@@ -34,7 +34,7 @@ jobs:
     - name: Start MySQL
       run: |
         docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=root \
-          -e MYSQL_DATABASE=testdb -e MYSQL_USER=testuser -e MYSQL_PASSWORD=testpass \
+          -e MYSQL_DATABASE=testdb -e MYSQL_USER=testuser -e MYSQL_PASSWORD=password \
           -p 3306:3306 -d mysql:latest
         sleep 20 # Attendi che il database sia pronto
 
@@ -43,14 +43,14 @@ jobs:
       env:
         DATABASE_URL: "jdbc:mysql://localhost:3306/testdb"
         DATABASE_USERNAME: "testuser"
-        DATABASE_PASSWORD: "testpass"
+        DATABASE_PASSWORD: "password"
 
     - name: Run JUnit tests
       run: mvn test
       env:
         DATABASE_URL: "jdbc:mysql://localhost:3306/testdb"
         DATABASE_USERNAME: "testuser"
-        DATABASE_PASSWORD: "testpass"
+        DATABASE_PASSWORD: "password"
 
     - name: Generate JaCoCo report
       run: mvn jacoco:report
