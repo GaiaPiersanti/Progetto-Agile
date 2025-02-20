@@ -92,7 +92,7 @@ public class Database {
         }
         return true;
     }
-
+    /* 
     public static Connection collegamento() {
     	Connection x = null;
     	try { //jdbc:mysql://127.0.0.1:3306/?user=root  
@@ -103,6 +103,28 @@ public class Database {
 		}
     	return x;
     }
+
+    */
+
+    public static Connection collegamento(){
+		try {
+			String url = System.getProperty("DATABASE_URL");  // Prende la variabile d'ambiente
+			String user = System.getProperty("DATABASE_USERNAME");
+			String password = System.getProperty("DATABASE_PASSWORD");
+	
+			if (url == null) {
+				// Usa il database di produzione SOLO se non è in esecuzione un test
+				url = "jdbc:mysql://127.0.0.1:3306/AgileDB";
+				user = "root";
+				password = "password";
+			}
+            System.out.println(url);
+			return DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
     
 }
 
