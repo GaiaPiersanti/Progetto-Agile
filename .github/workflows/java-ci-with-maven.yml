@@ -22,6 +22,15 @@ jobs:
         distribution: 'corretto'
         cache: maven
 
+    - name: Install Xvfb
+      run: sudo apt-get install -y xvfb    # installa X virtual framebuffer, che crea un ambiente virtuale per le applicazioni grafiche
+
+    - name: Start Xvfb
+      run: Xvfb :99 -screen 0 1920x1080x24 &
+
+    - name: Set DISPLAY environment variable
+      run: echo "DISPLAY=:99" >> $GITHUB_ENV
+
     - name: Build with Maven
       run: mvn -B install --file pom.xml
 
