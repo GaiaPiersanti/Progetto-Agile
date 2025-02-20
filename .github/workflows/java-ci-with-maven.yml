@@ -22,6 +22,9 @@ jobs:
         distribution: 'corretto'
         cache: maven
 
+    - name: Install JavaFX                         #  Installa JavaFX per supportare i test GUI
+      run: sudo apt-get install -y openjfx
+    
     - name: Install Xvfb
       run: sudo apt-get install -y xvfb    # installa X virtual framebuffer, che crea un ambiente virtuale per le applicazioni grafiche
 
