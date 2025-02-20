@@ -31,11 +31,26 @@ jobs:
     - name: Set DISPLAY environment variable
       run: echo "DISPLAY=:99" >> $GITHUB_ENV
 
+    - name: Start MySQL
+      run: |
+        docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=root \
+          -e MYSQL_DATABASE=testdb -e MYSQL_USER=testuser -e MYSQL_PASSWORD=testpass \
+          -p 3306:3306 -d mysql:latest
+        sleep 20 # Attendi che il database sia pronto
+
     - name: Build with Maven
       run: mvn -B install --file pom.xml
+      env:
+        DATABASE_URL: "jdbc:mysql://localhost:3306/testdb"
+        DATABASE_USERNAME: "testuser"
+        DATABASE_PASSWORD: "testpass"
 
     - name: Run JUnit tests
       run: mvn test
+      env:
+        DATABASE_URL: "jdbc:mysql://localhost:3306/testdb"
+        DATABASE_USERNAME: "testuser"
+        DATABASE_PASSWORD: "testpass"
 
     - name: Generate JaCoCo report
       run: mvn jacoco:report
