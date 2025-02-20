@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.concurrent.TimeoutException;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxRobotException;
@@ -29,7 +31,6 @@ import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
 class LoginMignonControllerTest extends TestFXBase{
-	int exist1=0, exist2=0;
 	final String MAIL_FIELD_ID = "#MailField";
 	final String PASS_FIELD_ID = "#PassField";
 	final String LOG_IN_BUTTON_ID = "#LogInButton";
@@ -38,36 +39,67 @@ class LoginMignonControllerTest extends TestFXBase{
 	final String SUC_BUTTON_ID = "#bottone";
 
 	LoginMignonController loginController;
+
 	
-	@BeforeEach
-	void setUp() {
+
+	
+	@BeforeAll
+	static void setUp() {     //jdbc:mysql://127.0.0.1:3307/?user=testuser    jdbc:mysql://localhost:3306/?user=root
+		System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/?user=root");
+    	System.setProperty("DATABASE_USERNAME", "root");
+    	System.setProperty("DATABASE_PASSWORD", "password");
 		try {
+			//Thread.sleep(10000);
 			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
-			exist1 = stmt.executeUpdate("INSERT INTO utenti (username,email,pass) values ('Mino','Dedalo@gmail.com','Tauro');");
-			exist2 = stmt.executeUpdate("DELETE FROM utenti WHERE username='gino' AND email='giorgino2@gmail.com' AND pass='ringolino'");
+			stmt.executeUpdate("create database if not exists testdb;\n" );
+								
 			stmt.close();
 			con.close();	
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} //catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				//}
+				System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/testdb");
+				System.setProperty("DATABASE_USERNAME", "root");
+				System.setProperty("DATABASE_PASSWORD", "password");
+	
+				try {
+					
+					Connection con = Database.collegamento();
+					Statement stmt = con.createStatement();
+					stmt.executeUpdate(
+								"create table if not exists utenti (\n" + //
+								"\tID integer unsigned auto_increment primary key,\n" + //
+								"\tusername char(25) not null,\n" + //
+								"    email char(100) not null unique,\n" + //
+								"    pass char(25) not null\n" + //
+								");");
+					stmt.executeUpdate("INSERT INTO utenti (username,email,pass) values ('Mino','Dedalo@gmail.com','Tauro');");
+
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
-	}
-	@AfterEach
-	void tearDown() {
+
+
+	@AfterAll
+	static void tearDown() {
 		try {
 			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
-			if(exist1>0) {
-				stmt.executeUpdate("DELETE FROM utenti WHERE username='Mino' AND email='Dedalo@gmail.com' AND pass='Tauro'");
-			}
-			if(exist2>0) {
-				stmt.executeUpdate("INSERT INTO utenti (username,email,pass) values ('gino','giorgino2@gmail.com','ringolino');");
-			}
+			stmt.executeQuery("drop database testdb;");
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.clearProperty("DATABASE_URL");
+    	System.clearProperty("DATABASE_USERNAME");
+    	System.clearProperty("DATABASE_PASSWORD");
 
 	}
 	
@@ -124,12 +156,14 @@ class LoginMignonControllerTest extends TestFXBase{
 		clickOn(MAIL_FIELD_ID).write("Mino");
 		clickOn(PASS_FIELD_ID).write("Tauro");
 		clickOn(LOG_IN_BUTTON_ID);
+		//clickOn(SUC_BUTTON_ID);
 		WaitForAsyncUtils.waitForFxEvents();
 		assertTrue(m.ok,"non è entrato nikname e password giuste");
 		clearOutImputFields("Mino".length(),"Tauro".length());
 		clickOn(MAIL_FIELD_ID).write("Dedalo@gmail.com");
 		clickOn(PASS_FIELD_ID).write("Tauro");
 		clickOn(LOG_IN_BUTTON_ID);
+		//clickOn(SUC_BUTTON_ID);
 		WaitForAsyncUtils.waitForFxEvents();
 		assertTrue(m.ok,"non è entrato email e password giuste");
 		
