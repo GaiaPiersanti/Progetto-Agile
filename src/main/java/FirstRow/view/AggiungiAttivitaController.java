@@ -93,7 +93,7 @@ public class AggiungiAttivitaController {
         Attivita nuovaAttivita = new Attivita(nome, categoria, scadenza, priorita);
 
         // Salva l'attività nel database
-        if (salvaAttivitaSuDatabase(nuovaAttivita)) {
+            if (salvaAttivitaSuDatabase(nuovaAttivita)) {
             // Aggiorna la tabella nella finestra principale
             if (elencoController != null) {
                 elencoController.aggiungiAttivitaAllaTabella(nuovaAttivita);

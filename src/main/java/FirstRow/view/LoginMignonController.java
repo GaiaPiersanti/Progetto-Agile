@@ -67,7 +67,7 @@ public class LoginMignonController {
 			try {
 					// Load the fxml file and create a new stage for the popup dialog.
 			        FXMLLoader loader = new FXMLLoader();
-			        loader.setLocation(MainFx.class.getResource("view/RispostaLoginSuccesso.fxml"));
+			        loader.setLocation(getClass().getClassLoader().getResource("RispostaLoginSuccesso.fxml"));
 			        AnchorPane page = (AnchorPane) loader.load();
 
 			        // Create the dialog Stage.
@@ -92,7 +92,7 @@ public class LoginMignonController {
 			try {
 		        	// Load the fxml file and create a new stage for the popup dialog.
 		        	FXMLLoader loader = new FXMLLoader();
-		        	loader.setLocation(MainFx.class.getResource("view/RispostaLoginInsuccesso.fxml"));
+		        	loader.setLocation(getClass().getClassLoader().getResource("RispostaLoginInsuccesso.fxml"));
 		        	AnchorPane page = (AnchorPane) loader.load();
 
 		        	// Create the dialog Stage.
@@ -122,7 +122,7 @@ public class LoginMignonController {
 			try {
 				// Load the fxml file and create a new stage for the popup dialog.
 					FXMLLoader loader = new FXMLLoader();
-			        loader.setLocation(MainFx.class.getResource("view/AttivitaCompletate.fxml"));
+			        loader.setLocation(getClass().getClassLoader().getResource("AttivitaCompletate.fxml"));
 			        Parent page = loader.load();
 
 
@@ -165,7 +165,7 @@ public class LoginMignonController {
 	
 	public void tornaIndietro(MouseEvent event) throws IOException{
 
-		FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("view/PaginaIniziale.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PaginaIniziale.fxml"));
     	Parent paginaIniziale = loader.load();
 		PaginaIController paginaIController = loader.getController();
     	paginaIController.setStage(lStage); 
@@ -187,7 +187,7 @@ public class LoginMignonController {
 	//link alla pagina di reset pw
 	@FXML
 	private void resetLink() throws IOException{
-		FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("view/ResetPassword.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ResetPassword.fxml"));
     	Parent paginaIniziale = loader.load();
 		ResetPasswordController resetPasswordController = loader.getController();
     	resetPasswordController.setStage(lStage); 

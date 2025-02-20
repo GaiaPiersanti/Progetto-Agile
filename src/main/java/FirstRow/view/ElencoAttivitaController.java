@@ -119,7 +119,7 @@ public class ElencoAttivitaController implements Initializable {
 	@FXML
 	private void handleAggiunta(ActionEvent event) throws IOException {
 
-		FXMLLoader loaderAttivita = new FXMLLoader(getClass().getResource("/FirstRow/view/Attivita.fxml"));
+		FXMLLoader loaderAttivita = new FXMLLoader(getClass().getClassLoader().getResource("Attivita.fxml"));
         Parent rootAggiungiA = loaderAttivita.load();
 		AggiungiAttivitaController controller = loaderAttivita.getController();
 		controller.setElencoController(this);
@@ -138,7 +138,7 @@ public class ElencoAttivitaController implements Initializable {
     
 		if (selectedAttivita != null) {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/ModificaAttivita.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ModificaAttivita.fxml"));
 				Parent root = loader.load();
 				ModificaAttivitaController controller = loader.getController();
 				controller.setAttivita(selectedAttivita);
@@ -338,7 +338,7 @@ public class ElencoAttivitaController implements Initializable {
 	}
 
 	public void dashboard(MouseEvent event) throws IOException{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/AttivitaCompletate.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AttivitaCompletate.fxml"));
 		Parent root = loader.load();
 		AttivitaCompletateController controller = loader.getController();
 		controller.setDialogStage(StageIn);
@@ -349,7 +349,7 @@ public class ElencoAttivitaController implements Initializable {
 	}
 	
 	public void Calendario(MouseEvent event) throws IOException{
-    	FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("/FirstRow/view/Calendar.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Calendar.fxml"));
         Parent root = loader.load();
         
         CalendarController controller = loader.getController();

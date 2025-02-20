@@ -45,7 +45,7 @@ public class PaginaIController {
     @FXML
 	public void loginBox(MouseEvent event) throws IOException{
         	
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/loginMignon.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("loginMignon.fxml"));
         Parent rootLogin = loader.load();
         LoginMignonController loginController = loader.getController();
         loginController.setStage(stage);
@@ -61,7 +61,7 @@ public class PaginaIController {
 				Boolean registrazioneOk = Database.connection(pInput.getText(), emailInput.getText(),uInput.getText(), null);
 
                 if(registrazioneOk){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/AttivitaCompletate.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AttivitaCompletate.fxml"));
                     Parent dashboardRoot = loader.load();
                     Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                     AttivitaCompletateController dashController = loader.getController();
