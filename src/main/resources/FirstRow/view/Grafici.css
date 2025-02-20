@@ -1,0 +1,4 @@
+.pane{
+    -fx-background-radius: 30px 30px 30px 30px;
+    -fx-border-radius: 30px 30px 30px 30px;
+}
