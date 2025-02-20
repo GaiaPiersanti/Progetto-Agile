@@ -36,7 +36,15 @@ jobs:
         docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=password \
           -e MYSQL_DATABASE=testdb -e MYSQL_USER=root -e MYSQL_PASSWORD=password \
           -p 3306:3306 -d mysql:latest
-        sleep 20 # Attendi che il database sia pronto
+        echo " Aspettando che MySQL sia pronto..."
+        for i in {30..0}; do
+            if docker exec test-mysql mysqladmin ping -h"localhost" --silent; then
+                echo " MySQL è pronto!"
+                break
+            fi
+            echo " MySQL non è ancora pronto, aspetto..."
+            sleep 2
+        done
 
     - name: Build with Maven
       run: mvn -B install --file pom.xml
