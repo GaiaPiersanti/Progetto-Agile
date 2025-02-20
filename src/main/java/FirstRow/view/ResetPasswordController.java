@@ -63,7 +63,7 @@ public class ResetPasswordController {
     @FXML
 	public void loginBox(MouseEvent event) throws IOException{
         	
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/loginMignon.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("loginMignon.fxml"));
         Parent rootLogin = loader.load();
         LoginMignonController loginController = loader.getController();
         loginController.setStage(ResetStage);
@@ -113,7 +113,7 @@ public class ResetPasswordController {
                     try{
                     // Load the fxml file and create a new stage for the popup dialog.
 		        	FXMLLoader loader = new FXMLLoader();
-		        	loader.setLocation(getClass().getResource("view/ResetConSuccesso.fxml"));
+		        	loader.setLocation(getClass().getClassLoader().getResource("ResetConSuccesso.fxml"));
 		        	AnchorPane page = (AnchorPane) loader.load();
 
 		        	// Create the dialog Stage

@@ -26,7 +26,7 @@ private Stage StageIn;
 		System.out.println("tutto ok");
 
         try{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/loginMignon.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("loginMignon.fxml"));
         Parent rootLogin = loader.load();
         LoginMignonController loginController = loader.getController();
         StageIn.setTitle("Pianificator");

@@ -133,7 +133,7 @@ public class CalendarController {
 	
 	
 	public void elencoAttivita(MouseEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/ElencoAttivita.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ElencoAttivita.fxml"));
         Parent root = loader.load();
         
         ElencoAttivitaController controller = loader.getController();
@@ -144,7 +144,7 @@ public class CalendarController {
     }
 	
 	public void dashboard(MouseEvent event) throws IOException{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/AttivitaCompletate.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AttivitaCompletate.fxml"));
 		Parent root = loader.load();
 		AttivitaCompletateController controller = loader.getController();
 		controller.setDialogStage(Stage);

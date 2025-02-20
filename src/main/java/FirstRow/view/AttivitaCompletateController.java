@@ -106,7 +106,7 @@ public class AttivitaCompletateController implements Initializable {
 
 	//metodi per far funzionare i bottoni e passare alle altre pagine 
 	public void elencoAttivita(MouseEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/ElencoAttivita.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ElencoAttivita.fxml"));
         Parent root = loader.load();
         
         ElencoAttivitaController controller = loader.getController();
@@ -118,7 +118,7 @@ public class AttivitaCompletateController implements Initializable {
     }
     
     public void Calendario(MouseEvent event) throws IOException{
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Calendar.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Calendar.fxml"));
         Parent root = loader.load();
         
         CalendarController controller = loader.getController();

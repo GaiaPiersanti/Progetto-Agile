@@ -2,6 +2,9 @@ package FirstRow;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import javax.print.DocFlavor.URL;
+
 import FirstRow.view.PaginaIController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,8 +19,14 @@ public class MainFx extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
+		java.net.URL fxmlUrl = getClass().getClassLoader().getResource("loginMignon.fxml");
+    	System.out.println("🔍 Percorso FXML trovato: " + fxmlUrl);
+
+    	if (fxmlUrl == null) 
+        throw new RuntimeException("❌ ERRORE: File FXML non trovato! Controlla il percorso.");
 			
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("view/PaginaIniziale.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PaginaIniziale.fxml"));
 		Parent rootPI = loader.load();
 
 		PaginaIController controller = loader.getController();
