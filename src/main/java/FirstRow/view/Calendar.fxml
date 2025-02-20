@@ -7,7 +7,7 @@
 
 <BorderPane fx:id="Finestra" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="parent" stylesheets="@Stylesheets.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstRow.view.CalendarController">
    <left>
-      <AnchorPane prefHeight="700.0" prefWidth="60.0" styleClass="parent" stylesheets="@sideBar.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefWidth="60.0" styleClass="parent" stylesheets="@sideBar.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="bannerImageIP" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
