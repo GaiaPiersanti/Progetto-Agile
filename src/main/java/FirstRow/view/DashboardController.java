@@ -79,7 +79,7 @@ public class DashboardController {
     }
     
     public void Calendario(MouseEvent event) throws IOException{
-    	FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("/FirstRow/view/Calendar.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Calendar.fxml"));
         Parent root = loader.load();
         
         CalendarController controller = loader.getController();

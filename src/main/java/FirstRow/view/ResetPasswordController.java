@@ -113,7 +113,7 @@ public class ResetPasswordController {
                     try{
                     // Load the fxml file and create a new stage for the popup dialog.
 		        	FXMLLoader loader = new FXMLLoader();
-		        	loader.setLocation(MainFx.class.getResource("view/ResetConSuccesso.fxml"));
+		        	loader.setLocation(getClass().getResource("view/ResetConSuccesso.fxml"));
 		        	AnchorPane page = (AnchorPane) loader.load();
 
 		        	// Create the dialog Stage

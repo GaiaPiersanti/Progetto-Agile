@@ -39,7 +39,7 @@ public class ModificaAttivitaController {
         
     }
 
-      public void setStage(Stage stage) {
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
@@ -52,8 +52,8 @@ public class ModificaAttivitaController {
 
     @FXML
     private void handleSalvaModifiche(ActionEvent event) {
-        if (attivitaSelezionata != null) {
-            Attivita nuovaAttivita = new Attivita(
+                if (attivitaSelezionata != null) {
+                Attivita nuovaAttivita = new Attivita(
                 nomeAttivita.getText(),
                 categoriaAttivita.getValue(),
                 Date.valueOf(scadenzaAttivita.getValue()),
