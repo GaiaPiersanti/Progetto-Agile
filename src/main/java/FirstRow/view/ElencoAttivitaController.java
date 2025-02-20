@@ -338,10 +338,10 @@ public class ElencoAttivitaController implements Initializable {
 	}
 
 	public void dashboard(MouseEvent event) throws IOException{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Dashboard.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/AttivitaCompletate.fxml"));
 		Parent root = loader.load();
-		DashboardController controller = loader.getController();
-		controller.setStage(StageIn);
+		AttivitaCompletateController controller = loader.getController();
+		controller.setDialogStage(StageIn);
 		Stage stage = (Stage) TabellaAttivita.getScene().getWindow(); // Prendi lo Stage corrente
 		stage.setTitle("Dashboard");
 		stage.setScene(new Scene(root));

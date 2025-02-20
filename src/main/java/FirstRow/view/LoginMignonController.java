@@ -122,7 +122,7 @@ public class LoginMignonController {
 			try {
 				// Load the fxml file and create a new stage for the popup dialog.
 					FXMLLoader loader = new FXMLLoader();
-			        loader.setLocation(MainFx.class.getResource("view/Dashboard.fxml"));
+			        loader.setLocation(MainFx.class.getResource("view/AttivitaCompletate.fxml"));
 			        Parent page = loader.load();
 
 
@@ -133,8 +133,8 @@ public class LoginMignonController {
 			        dialogStage.setScene(scene);
 
 			    	// Set the person into the controller.
-					DashboardController controller = loader.getController();
-			    	controller.setStage(dialogStage);
+					AttivitaCompletateController controller = loader.getController();
+			    	controller.setDialogStage(dialogStage);
 			    	dialogStage.show();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block

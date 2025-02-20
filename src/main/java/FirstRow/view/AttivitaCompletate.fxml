@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1050.0" prefWidth="1440.0" styleClass="parent" stylesheets="@Stylesheets.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstRow.view.ElencoAttivitaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1050.0" prefWidth="1440.0" styleClass="parent" stylesheets="@Stylesheets.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstRow.view.AttivitaCompletateController">
    <left>
       <AnchorPane prefHeight="852.0" prefWidth="71.0" styleClass="parent" stylesheets="@sideBar.css" BorderPane.alignment="CENTER">
          <children>
@@ -22,17 +22,17 @@
                   <Image url="@../../../resources/Immagini/IconaProfilo.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bannerImageIC" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="275.0" onMouseClicked="#dashboard" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bannerImageIC" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/Immagini/CasaIcona.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bannerImageIE" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bannerImageIE" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="220.0" onMouseClicked="#elencoAttivita" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/Immagini/IconaLista.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bannerImageICalendario" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bannerImageICalendario" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="330.0" onMouseClicked="#Calendario" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/Immagini/IconaCalendario.png" />
                </image>
