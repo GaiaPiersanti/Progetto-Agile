@@ -34,7 +34,7 @@ jobs:
     - name: Start MySQL
       run: |
         docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=password \
-          -e MYSQL_DATABASE=testdb -e MYSQL_USER=root -e MYSQL_PASSWORD=password \
+          -e MYSQL_DATABASE=testdb \
           -p 3306:3306 -d mysql:latest
         echo " Aspettando che MySQL sia pronto..."
         for i in {30..0}; do
