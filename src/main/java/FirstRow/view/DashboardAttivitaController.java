@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -63,7 +64,12 @@ public class DashboardAttivitaController implements Initializable {
 	@FXML
 	private ImageView bannerImageICalendario;
 
+	//grafici
+    @FXML
+	private PieChart GraficoTortaCompletate;
+
     private Stage StageCompl;
+
 
     @Override
     public void initialize ( URL location, ResourceBundle resources ) {
@@ -96,8 +102,13 @@ public class DashboardAttivitaController implements Initializable {
         ColScadenza1.setCellValueFactory(new PropertyValueFactory<Attivita,Date>("Scadenza"));
         ColPriorita1.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Priorita"));
 
+		//lista da riempire con i dati del grafico a torta
+		ObservableList<PieChart.Data> listPie = FXCollections.observableArrayList();
+		
 
-		//riempimento della tabella completate
+
+
+		//riempimento della tabella completate e urgenti
         Connection con = Database.collegamento();
 		ObservableList<Attivita> list = FXCollections.observableArrayList(); //list Completate
 		ObservableList<Attivita> list1 = FXCollections.observableArrayList(); // list1 urgenti
@@ -130,7 +141,50 @@ public class DashboardAttivitaController implements Initializable {
 		}
         TabellaAttivita.setItems(list); // il list dentro il while prende tutti gli elementi prese dalla select e poi lo uso per riempire la tabella
 		TabellaAttivitaUrgenti.setItems(list1); //idem per urgenti
+
+		//riempimento grafico a torta
+		Connection con1 = Database.collegamento();
+
+		//3 fette
+		PieChart.Data AltaPriorita = new PieChart.Data("Alta priorità", 0);
+		PieChart.Data MediaPriorita =new PieChart.Data("Media priorità", 0);
+		PieChart.Data BassaPriorita =new PieChart.Data("Bassa priorità", 0);
+
+		if (con1 == null) {
+			System.out.println("errore nel caricamento in collegamento");
+		}
+		try {
+			Statement stmt1 = con1.createStatement();
+			ResultSet rs;
+
+			rs = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Alta' AND completato=1");
+			rs.next();
+			AltaPriorita.setPieValue(rs.getInt("COUNT(*)"));
+
+			rs = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Media' AND completato=1");
+			rs.next();
+			MediaPriorita.setPieValue(rs.getInt("COUNT(*)"));
+
+			rs = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Bassa' AND completato=1");
+			rs.next();
+			BassaPriorita.setPieValue(rs.getInt("COUNT(*)"));
+			
+			rs.close();
+			stmt1.close();
+			con1.close();
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	}
+		listPie.addAll(AltaPriorita, MediaPriorita, BassaPriorita); //aggiungi alla lista
+		GraficoTortaCompletate.setData(listPie); //riempi il grafo
+		GraficoTortaCompletate.setTitle("Grafico a torta delle attività completate divise per categoria");
+
     }
+
+	
 	
 	//passaggio dello stage dalla pagina precedente a questa
 	public void setDialogStage(Stage dialogStage) {
