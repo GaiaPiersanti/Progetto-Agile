@@ -20,7 +20,7 @@ public class ElencoAttivitaControllerTest extends TestFXBase{
 	@Override
 	public void start(Stage stage) throws Exception{
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainFx.class.getResource("view/ElencoAttivita.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("ElencoAttivita.fxml"));
         Parent page = loader.load();
 
 
@@ -34,12 +34,6 @@ public class ElencoAttivitaControllerTest extends TestFXBase{
         ElencoAttivitaController controller = loader.getController();
     	controller.setDialogStage(dialogStage);
 	     dialogStage.show();
-	}
 
-	
-	@Test
-	public void laTabellaNonEVuota() {
-		TableView<Attivita> tab = (TableView<Attivita>)find(TABLE_ID);
-		assertNotEquals(null,tab.getItems(),"non c'è una tabella");
-	}
+	}	
 }

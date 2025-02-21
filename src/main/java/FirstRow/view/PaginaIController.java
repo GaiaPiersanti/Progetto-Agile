@@ -51,6 +51,8 @@ public class PaginaIController {
         loginController.setStage(stage);
 		Scene scenaLogin = new Scene(rootLogin, 700, 500);
         stage.setScene(scenaLogin);
+        stage.setMinWidth(1000);
+        stage.setMinHeight(800);
 	
   	  }
 
@@ -72,7 +74,6 @@ public class PaginaIController {
                     stage.setMinHeight(800);
                     stage.show();
                 }
-				
 		}
-    
-}
+    }
+

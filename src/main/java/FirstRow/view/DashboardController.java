@@ -2,6 +2,9 @@ package FirstRow.view;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.time.LocalTime;
 
 import com.calendarfx.model.Calendar;
@@ -88,4 +91,26 @@ public class DashboardController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    public static Connection collegamento(){
+		try {
+			String url = System.getProperty("DATABASE_URL");  // Prende la variabile d'ambiente
+			String user = System.getProperty("DATABASE_USERNAME");
+			String password = System.getProperty("DATABASE_PASSWORD");
+
+			if (url == null) {
+				// Usa il database di produzione SOLO se non è in esecuzione un test
+				url = "jdbc:mysql://127.0.0.1:3306/AgileDB";
+				user = "root";
+				password = "MaicholZed01.";
+			}
+            System.out.println(url);
+			return DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
 }
