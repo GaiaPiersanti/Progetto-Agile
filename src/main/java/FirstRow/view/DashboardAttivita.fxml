@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -108,6 +111,22 @@
                               </DropShadow>
                            </effect>
                         </Label>
+                        <BarChart fx:id="GraficoIstogrammaUrgenti" alternativeColumnFillVisible="true" categoryGap="1.0" layoutX="786.0" layoutY="119.0" prefHeight="435.0" prefWidth="561.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" tickLength="30.0">
+                                 <tickLabelFont>
+                                    <Font size="10.0" />
+                                 </tickLabelFont>
+                              </CategoryAxis>
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" upperBound="15.0">
+                                 <tickLabelFont>
+                                    <Font size="10.0" />
+                                 </tickLabelFont>
+                              </NumberAxis>
+                          </yAxis>
+                        </BarChart>
                      </children>
                   </AnchorPane>
               </content>

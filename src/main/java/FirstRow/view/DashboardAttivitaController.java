@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.time.LocalDate;
 
@@ -22,7 +25,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -67,6 +72,10 @@ public class DashboardAttivitaController implements Initializable {
 	//grafici
     @FXML
 	private PieChart GraficoTortaCompletate;
+
+	@FXML
+	private BarChart<String, Integer> GraficoIstogrammaUrgenti;
+
 
     private Stage StageCompl;
 
@@ -142,34 +151,38 @@ public class DashboardAttivitaController implements Initializable {
         TabellaAttivita.setItems(list); // il list dentro il while prende tutti gli elementi prese dalla select e poi lo uso per riempire la tabella
 		TabellaAttivitaUrgenti.setItems(list1); //idem per urgenti
 
+
+
 		//riempimento grafico a torta
-		Connection con1 = Database.collegamento();
+		
 
 		//3 fette
 		PieChart.Data AltaPriorita = new PieChart.Data("Alta priorità", 0);
 		PieChart.Data MediaPriorita =new PieChart.Data("Media priorità", 0);
 		PieChart.Data BassaPriorita =new PieChart.Data("Bassa priorità", 0);
 
-		if (con1 == null) {
-			System.out.println("errore nel caricamento in collegamento");
-		}
+		
 		try {
+			Connection con1 = Database.collegamento();
+			if (con1 == null) {
+				System.out.println("errore nel caricamento in collegamento");
+			}
 			Statement stmt1 = con1.createStatement();
-			ResultSet rs;
+			ResultSet rs2;
 
-			rs = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Alta' AND completato=1");
-			rs.next();
-			AltaPriorita.setPieValue(rs.getInt("COUNT(*)"));
+			rs2 = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Alta' AND completato=1");
+			rs2.next();
+			AltaPriorita.setPieValue(rs2.getInt("COUNT(*)"));
 
-			rs = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Media' AND completato=1");
-			rs.next();
-			MediaPriorita.setPieValue(rs.getInt("COUNT(*)"));
+			rs2 = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Media' AND completato=1");
+			rs2.next();
+			MediaPriorita.setPieValue(rs2.getInt("COUNT(*)"));
 
-			rs = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Bassa' AND completato=1");
-			rs.next();
-			BassaPriorita.setPieValue(rs.getInt("COUNT(*)"));
+			rs2 = stmt1.executeQuery("SELECT COUNT(*) FROM attivita WHERE priorita = 'Bassa' AND completato=1");
+			rs2.next();
+			BassaPriorita.setPieValue(rs2.getInt("COUNT(*)"));
 			
-			rs.close();
+			rs2.close();
 			stmt1.close();
 			con1.close();
 			
@@ -180,9 +193,88 @@ public class DashboardAttivitaController implements Initializable {
 	}
 		listPie.addAll(AltaPriorita, MediaPriorita, BassaPriorita); //aggiungi alla lista
 		GraficoTortaCompletate.setData(listPie); //riempi il grafo
-		GraficoTortaCompletate.setTitle("Grafico a torta delle attività completate divise per categoria");
+		GraficoTortaCompletate.setTitle("Grafico a torta delle attività completate divise per priorità");
 
-    }
+
+
+		//creazione serie per il grafico istogramma
+
+
+		XYChart.Series alta = new XYChart.Series();
+		XYChart.Series media = new XYChart.Series();
+		XYChart.Series bassa = new XYChart.Series();
+		alta.setName("Alta Priorità");
+		media.setName("Media Priorità");
+		bassa.setName("Bassa Priorità");
+		
+		//riempimento istogramma urgenti
+		try {
+			Connection con2 = Database.collegamento();
+			PreparedStatement stmt1 = con2.prepareStatement("SELECT COUNT(*) FROM attivita WHERE priorita = ? AND completato = 0 AND scadenza = ?");
+			ResultSet rs1 = null;
+
+				for(int x = 0; x<=6; x++){
+					stmt1.setString(1,"Alta");
+					stmt1.setDate(2, Date.valueOf(LocalDate.now().plusDays(x)));	
+					rs1 = stmt1.executeQuery();
+					rs1.next();
+					alta.getData().add(new XYChart.Data(Date.valueOf(LocalDate.now().plusDays(x)).toString(), rs1.getInt("COUNT(*)")));
+				}
+
+
+				for(int x = 0; x<=6; x++){
+					stmt1.setString(1,"Media");
+					stmt1.setDate(2, Date.valueOf(LocalDate.now().plusDays(x)));	
+					rs1 = stmt1.executeQuery();
+					rs1.next();
+					media.getData().add(new XYChart.Data(Date.valueOf(LocalDate.now().plusDays(x)).toString(), rs1.getInt("COUNT(*)")));
+				}
+
+
+				for(int x = 0; x<=6; x++){
+					stmt1.setString(1,"Bassa");
+					stmt1.setDate(2, Date.valueOf(LocalDate.now().plusDays(x)));	
+					rs1 = stmt1.executeQuery();
+					rs1.next();
+					bassa.getData().add(new XYChart.Data(Date.valueOf(LocalDate.now().plusDays(x)).toString(), rs1.getInt("COUNT(*)")));
+				}
+			
+			
+				rs1.close();
+				stmt1.close();
+				con2.close();
+			
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	}
+	    GraficoIstogrammaUrgenti.getData().addAll(alta, media, bassa);
+		GraficoIstogrammaUrgenti.setTitle("Istogramma delle attività in scadenza nei prossimi 7 giorni");
+
+
+		
+
+    }//fine  initialiaze
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 	
@@ -215,4 +307,5 @@ public class DashboardAttivitaController implements Initializable {
 		StageCompl.show();
     }
 }
+
 
