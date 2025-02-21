@@ -26,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
@@ -75,6 +76,10 @@ public class DashboardAttivitaController implements Initializable {
 
 	@FXML
 	private BarChart<String, Integer> GraficoIstogrammaUrgenti;
+
+	@FXML
+    private LineChart<String, Integer> Grafo30giorni;
+
 
 
     private Stage StageCompl;
@@ -196,22 +201,24 @@ public class DashboardAttivitaController implements Initializable {
 		GraficoTortaCompletate.setTitle("Grafico a torta delle attività completate divise per priorità");
 
 
-
 		//creazione serie per il grafico istogramma
-
-
 		XYChart.Series alta = new XYChart.Series();
 		XYChart.Series media = new XYChart.Series();
 		XYChart.Series bassa = new XYChart.Series();
 		alta.setName("Alta Priorità");
 		media.setName("Media Priorità");
 		bassa.setName("Bassa Priorità");
+
+		//creazione serie per istogramma 30 gg
+		XYChart.Series linea30 = new XYChart.Series();
+		linea30.setName("Attività completate negli ultimi 30 giorni");
 		
 		//riempimento istogramma urgenti
 		try {
 			Connection con2 = Database.collegamento();
 			PreparedStatement stmt1 = con2.prepareStatement("SELECT COUNT(*) FROM attivita WHERE priorita = ? AND completato = 0 AND scadenza = ?");
 			ResultSet rs1 = null;
+
 
 				for(int x = 0; x<=6; x++){
 					stmt1.setString(1,"Alta");
@@ -239,7 +246,12 @@ public class DashboardAttivitaController implements Initializable {
 					bassa.getData().add(new XYChart.Data(Date.valueOf(LocalDate.now().plusDays(x)).toString(), rs1.getInt("COUNT(*)")));
 				}
 			
-			
+
+				//riempimento grafo 30
+
+				
+				
+
 				rs1.close();
 				stmt1.close();
 				con2.close();
@@ -250,8 +262,36 @@ public class DashboardAttivitaController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 	}
+		//urgenti
 	    GraficoIstogrammaUrgenti.getData().addAll(alta, media, bassa);
 		GraficoIstogrammaUrgenti.setTitle("Istogramma delle attività in scadenza nei prossimi 7 giorni");
+
+		try {
+			Connection con2 = Database.collegamento();
+			ResultSet rs1 = null;
+			PreparedStatement stmt2 = con2.prepareStatement("SELECT COUNT(*) FROM attivita WHERE completato = 1 AND scadenza = ?");
+				
+
+				for(int x = 30; x>=0; x--){
+					
+					stmt2.setDate(1, Date.valueOf(LocalDate.now().minusDays(x)));	
+					rs1 = stmt2.executeQuery();
+					rs1.next();
+					linea30.getData().add(new XYChart.Data(Date.valueOf(LocalDate.now().minusDays(x)).toString(), rs1.getInt("COUNT(*)")));
+				}
+				rs1.close();
+				stmt2.close();
+				con2.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		//30giorni
+		Grafo30giorni.getData().addAll(linea30);
+		Grafo30giorni.setTitle("Grafo della produttività degli ultimi 30 giorni");
+
+
+
 
 
 		
