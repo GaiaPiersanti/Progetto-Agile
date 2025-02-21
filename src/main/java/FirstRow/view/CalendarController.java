@@ -138,15 +138,15 @@ public class CalendarController {
         
         ElencoAttivitaController controller = loader.getController();
         controller.setDialogStage(Stage);
-        Stage.setTitle("Elenco Attvità");
+        Stage.setTitle("Elenco Attività");
         Stage.setScene(new Scene(root));
         Stage.show();
     }
 	
 	public void dashboard(MouseEvent event) throws IOException{
-		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AttivitaCompletate.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("DashboardAttivita.fxml"));
 		Parent root = loader.load();
-		AttivitaCompletateController controller = loader.getController();
+		DashboardAttivitaController controller = loader.getController();
 		controller.setDialogStage(Stage);
 		Stage.setTitle("Dashboard");
 		Stage.setScene(new Scene(root));

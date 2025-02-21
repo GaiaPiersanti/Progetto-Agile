@@ -10,40 +10,12 @@ import java.sql.*;
 
 public class Database {
 
-
-    public static void removeD(Connection con) throws SQLException{
-
-        Statement st = null;
-        ResultSet rs = null;
-        String query2 = "delete from utenti";
-        String query3 = "SET SQL_SAFE_UPDATES = 0;";
-
-        try {
-            st = con.createStatement();
-            st.executeUpdate(query3);
-            st.executeUpdate(query2);
-
-            if(rs.next()){
-                System.out.println(rs.getString("email"));
-            }
-
-
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        finally {
-            if (rs != null){rs.close();}
-            if (st != null){ st.close();};
-        }
-
-
-    }
-
     public static boolean connection(String pInput, String email, String usernameI, Connection con) throws Exception{
 
         PreparedStatement st = null;
         PreparedStatement checkEmailStmt = null;
         ResultSet rs = null;
+        boolean registrato = true;
 
 
         try {
@@ -65,11 +37,12 @@ public class Database {
                 errorWindow.setTitle("Errore");
                 errorWindow.setScene(errorScene);
                 errorWindow.show();
+                registrato = false;
 
             }
 
             else{
-                removeD(con);
+
                 st = con.prepareStatement("insert into utenti (email, pass, username) values (?, ?, ?)");
                 st.setString(1, email);
                 st.setString(2, pInput);
@@ -80,6 +53,7 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            registrato = false; 
 
         }
 
@@ -87,10 +61,13 @@ public class Database {
 
         finally {
 
-            st.close();
-            con.close();
+            if (rs != null) rs.close();
+            if (checkEmailStmt != null) checkEmailStmt.close();
+            if (st != null) st.close();
+            if (con != null) con.close();
+
         }
-        return true;
+        return registrato;
     }
     /* 
     public static Connection collegamento() {
