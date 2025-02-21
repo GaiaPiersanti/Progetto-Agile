@@ -3,6 +3,18 @@ package FirstRow.view;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.testfx.api.FxRobotException;
+import org.testfx.util.WaitForAsyncUtils;
+import FirstRow.Database;
+import FirstRow.TestFXBase;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,7 +40,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.stage.Stage;
 
 class LoginMignonControllerTest extends TestFXBase{
 	final String MAIL_FIELD_ID = "#MailField";
@@ -44,10 +55,11 @@ class LoginMignonControllerTest extends TestFXBase{
 
 	
 	@BeforeAll
-	static void setUp() {     //jdbc:mysql://127.0.0.1:3307/?user=testuser    jdbc:mysql://localhost:3306/?user=root
-		System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/?user=root");
+	static void setUp() {     //jdbc:mysql://127.0.0.1:3307/?user=testuser    jdbc:mysql://localhost:3306/?user=root  jdbc:mysql://127.0.0.1:3306/testdb
+		System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/?testdb");
     	System.setProperty("DATABASE_USERNAME", "root");
-    	System.setProperty("DATABASE_PASSWORD", "password");
+    	System.setProperty("DATABASE_PASSWORD", "MaicholZed01."); //password , MaicholZed01.
+    
 		try {
 			//Thread.sleep(10000);
 			Connection con = Database.collegamento();
@@ -64,7 +76,7 @@ class LoginMignonControllerTest extends TestFXBase{
 				//}
 				System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/testdb");
 				System.setProperty("DATABASE_USERNAME", "root");
-				System.setProperty("DATABASE_PASSWORD", "password");
+				System.setProperty("DATABASE_PASSWORD", "MaicholZed01.");
 	
 				try {
 					
@@ -91,7 +103,7 @@ class LoginMignonControllerTest extends TestFXBase{
 		try {
 			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("drop database testdb;");
+			stmt.executeUpdate("drop database testdb;");
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
