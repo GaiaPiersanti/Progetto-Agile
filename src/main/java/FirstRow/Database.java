@@ -93,7 +93,7 @@ public class Database {
 				// Usa il database di produzione SOLO se non è in esecuzione un test
 				url = "jdbc:mysql://127.0.0.1:3306/AgileDB";
 				user = "root";
-				password = "MaicholZed01.";
+				password = "password";
 			}
             System.out.println(url);
 			return DriverManager.getConnection(url, user, password);
