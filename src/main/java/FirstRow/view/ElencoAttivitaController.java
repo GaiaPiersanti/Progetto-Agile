@@ -28,6 +28,7 @@ import java.sql.Statement;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Calendar.Style;
@@ -338,9 +339,9 @@ public class ElencoAttivitaController implements Initializable {
 	}
 
 	public void dashboard(MouseEvent event) throws IOException{
-		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AttivitaCompletate.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("DashboardAttivita.fxml"));
 		Parent root = loader.load();
-		AttivitaCompletateController controller = loader.getController();
+		DashboardAttivitaController controller = loader.getController();
 		controller.setDialogStage(StageIn);
 		Stage stage = (Stage) TabellaAttivita.getScene().getWindow(); // Prendi lo Stage corrente
 		stage.setTitle("Dashboard");

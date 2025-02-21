@@ -61,10 +61,10 @@ public class PaginaIController {
 				Boolean registrazioneOk = Database.connection(pInput.getText(), emailInput.getText(),uInput.getText(), null);
 
                 if(registrazioneOk){
-                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AttivitaCompletate.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("DashboardAttivita.fxml"));
                     Parent dashboardRoot = loader.load();
                     Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-                    AttivitaCompletateController dashController = loader.getController();
+                    DashboardAttivitaController dashController = loader.getController();
                     dashController.setDialogStage(this.stage);
                     Scene dashboardScene = new Scene(dashboardRoot, 1000, 700); // Imposta le dimensioni che preferisci
                     stage.setScene(dashboardScene);
