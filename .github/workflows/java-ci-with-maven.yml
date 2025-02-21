@@ -22,11 +22,46 @@ jobs:
         distribution: 'corretto'
         cache: maven
 
+    - name: Install JavaFX                         #  Installa JavaFX per supportare i test GUI
+      run: sudo apt-get install -y openjfx
+    
+    - name: Install Xvfb
+      run: sudo apt-get install -y xvfb    # installa X virtual framebuffer, che crea un ambiente virtuale per le applicazioni grafiche
+
+    - name: Start Xvfb
+      run: Xvfb :99 -screen 0 1920x1080x24 &
+
+    - name: Set DISPLAY environment variable
+      run: echo "DISPLAY=:99" >> $GITHUB_ENV
+
+    - name: Start MySQL
+      run: |
+        docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=password \
+          -e MYSQL_DATABASE=testdb \
+          -p 3306:3306 -d mysql:latest
+        echo " Aspettando che MySQL sia pronto..."
+        for i in {30..0}; do
+            if docker exec test-mysql mysqladmin ping -h"localhost" --silent; then
+                echo " MySQL è pronto!"
+                break
+            fi
+            echo " MySQL non è ancora pronto, aspetto..."
+            sleep 2
+        done
+
     - name: Build with Maven
-      run: mvn -B clean install --file pom.xml
+      run: mvn -B install --file pom.xml
+      env:
+        DATABASE_URL: "jdbc:mysql://localhost:3306/testdb"
+        DATABASE_USERNAME: "root"
+        DATABASE_PASSWORD: "password"
 
     - name: Run JUnit tests
       run: mvn test
+      env:
+        DATABASE_URL: "jdbc:mysql://localhost:3306/testdb"
+        DATABASE_USERNAME: "root"
+        DATABASE_PASSWORD: "password"
 
     - name: Generate JaCoCo report
       run: mvn jacoco:report

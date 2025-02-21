@@ -58,6 +58,27 @@
       <artifactId>mysql-connector-j</artifactId>
       <version>8.4.0</version>
     </dependency>
+	
+	<!-- TestFx Dependencys -->
+	<dependency>
+    	<groupId>org.testfx</groupId>
+    	<artifactId>testfx-core</artifactId>
+    	<version>4.0.18</version>
+    	<scope>test</scope>
+	</dependency>
+    <dependency>
+    	<groupId>org.testfx</groupId>
+    	<artifactId>testfx-junit5</artifactId>
+    	<version>4.0.18</version>
+    	<scope>test</scope>
+	</dependency>
+	
+	<!-- claendarFx Dependencys -->
+	<dependency>
+    	<groupId>com.calendarfx</groupId>
+    	<artifactId>view</artifactId>
+    	<version>11.12.7</version>
+	</dependency>
 
 <!-- non so cosa siano viene dal marasma di michele-->
 <dependency>
@@ -175,6 +196,7 @@
           <mainClass>FirstRow.MainFx</mainClass>
         </configuration>
       </plugin>
+      
         <!--
          Plugin per il controllo di stile del codice con Checkstyle
           <plugin>
@@ -196,8 +218,21 @@
           </plugin>
       -->
 
-
+    
 
     </plugins>
-  </build>
+
+    
+    <resources>
+        <resource>
+            <directory>src/main/resources/FirstRow/view</directory>
+            <includes>
+                <include>**/*.fxml</include>
+                <include>**/*.properties</include>
+                <include>**/*.css</include>
+            </includes>
+        </resource>
+    </resources>
+</build>
+  
 </project>

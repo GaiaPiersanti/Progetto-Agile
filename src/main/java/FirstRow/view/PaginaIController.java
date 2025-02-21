@@ -44,8 +44,8 @@ public class PaginaIController {
     
     @FXML
 	public void loginBox(MouseEvent event) throws IOException{
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/loginMignon.fxml"));
+        	
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("loginMignon.fxml"));
         Parent rootLogin = loader.load();
         LoginMignonController loginController = loader.getController();
         loginController.setStage(stage);
@@ -64,9 +64,11 @@ public class PaginaIController {
 
 <<<<<<< Updated upstream
                 if(registrazioneOk){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Dashboard.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("DashboardAttivita.fxml"));
                     Parent dashboardRoot = loader.load();
                     Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                    DashboardAttivitaController dashController = loader.getController();
+                    dashController.setDialogStage(this.stage);
                     Scene dashboardScene = new Scene(dashboardRoot, 1000, 700); // Imposta le dimensioni che preferisci
                     stage.setScene(dashboardScene);
                     stage.setMinWidth(1000);

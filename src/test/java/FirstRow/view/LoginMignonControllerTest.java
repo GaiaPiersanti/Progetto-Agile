@@ -15,7 +15,31 @@ import FirstRow.TestFXBase;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.concurrent.TimeoutException;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.testfx.api.FxRobotException;
+import org.testfx.api.FxToolkit;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
+
+import FirstRow.Database;
+import FirstRow.MainFx;
+import FirstRow.TestFXBase;
+import FirstRow.view.LoginMignonController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 
 class LoginMignonControllerTest extends TestFXBase{
 	final String MAIL_FIELD_ID = "#MailField";
@@ -35,6 +59,7 @@ class LoginMignonControllerTest extends TestFXBase{
 		System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/?testdb");
     	System.setProperty("DATABASE_USERNAME", "root");
     	System.setProperty("DATABASE_PASSWORD", "MaicholZed01."); //password , MaicholZed01.
+    
 		try {
 			//Thread.sleep(10000);
 			Connection con = Database.collegamento();

@@ -3,10 +3,11 @@ package FirstRow.view;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import FirstRow.Database;
 import FirstRow.MainFx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
@@ -27,12 +29,14 @@ public class LoginMignonController {
 	@FXML
 	private PasswordField PassField;
 	@FXML
+	private Button LogInButton;
+	@FXML
 	private ImageView bannerImageLogin;
-	private Stage lStage;
+	Stage lStage;
 
 	
-	private Stage dialogStageIn;
-	private boolean ok;
+	Stage dialogStageIn;
+	boolean ok;
 	private Scene rettiffica;
 
 	
@@ -63,7 +67,7 @@ public class LoginMignonController {
 			try {
 					// Load the fxml file and create a new stage for the popup dialog.
 			        FXMLLoader loader = new FXMLLoader();
-			        loader.setLocation(MainFx.class.getResource("view/RispostaLoginSuccesso.fxml"));
+			        loader.setLocation(getClass().getClassLoader().getResource("RispostaLoginSuccesso.fxml"));
 			        AnchorPane page = (AnchorPane) loader.load();
 
 			        // Create the dialog Stage.
@@ -78,8 +82,9 @@ public class LoginMignonController {
 		        	controller.setDialogStage(dialogStage);
 
 		        	// Show the dialog and wait until the user closes it
-		        	dialogStage.showAndWait();
 		        	ok = true;
+		        	dialogStage.showAndWait();
+		        	
 		    	} catch (IOException e) {
 		    		e.printStackTrace();
 		    	}
@@ -87,7 +92,7 @@ public class LoginMignonController {
 			try {
 		        	// Load the fxml file and create a new stage for the popup dialog.
 		        	FXMLLoader loader = new FXMLLoader();
-		        	loader.setLocation(MainFx.class.getResource("view/RispostaLoginInsuccesso.fxml"));
+		        	loader.setLocation(getClass().getClassLoader().getResource("RispostaLoginInsuccesso.fxml"));
 		        	AnchorPane page = (AnchorPane) loader.load();
 
 		        	// Create the dialog Stage.
@@ -114,6 +119,27 @@ public class LoginMignonController {
 
 		if(ok) {
 			dialogStageIn.close();
+			try {
+				// Load the fxml file and create a new stage for the popup dialog.
+					FXMLLoader loader = new FXMLLoader();
+			        loader.setLocation(getClass().getClassLoader().getResource("DashboardAttivita.fxml"));
+			        Parent page = loader.load();
+
+
+			        // Create the dialog Stage.
+			        Stage dialogStage = new Stage();
+			        dialogStage.setTitle("Dashboard");
+			        Scene scene = new Scene(page);
+			        dialogStage.setScene(scene);
+
+			    	// Set the person into the controller.
+					DashboardAttivitaController controller = loader.getController();
+			    	controller.setDialogStage(dialogStage);
+			    	dialogStage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		}
 	}
 	
@@ -122,7 +148,7 @@ public class LoginMignonController {
 	 boolean utenteEsistente(String x, String y) {
 		boolean res=false;
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/AgileDB","root","MaicholZed01.");
+			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM utenti WHERE email='"+x+"'AND pass='"+y+"' or username='"+x+"' AND pass='"+y+"'");
 			
@@ -139,7 +165,7 @@ public class LoginMignonController {
 	
 	public void tornaIndietro(MouseEvent event) throws IOException{
 
-		FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("view/PaginaIniziale.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PaginaIniziale.fxml"));
     	Parent paginaIniziale = loader.load();
 		PaginaIController paginaIController = loader.getController();
     	paginaIController.setStage(lStage); 
@@ -156,5 +182,18 @@ public class LoginMignonController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+    
+	//link alla pagina di reset pw
+	@FXML
+	private void resetLink() throws IOException{
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ResetPassword.fxml"));
+    	Parent paginaIniziale = loader.load();
+		ResetPasswordController resetPasswordController = loader.getController();
+    	resetPasswordController.setStage(lStage); 
+		Scene sBack = new Scene(paginaIniziale);
+		lStage.setScene(sBack);
+		//lStage.show();
+
 	}
 }

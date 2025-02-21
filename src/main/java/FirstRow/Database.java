@@ -12,9 +12,6 @@ public class Database {
 
     public static boolean connection(String pInput, String email, String usernameI, Connection con) throws Exception{
 
-        String url = "jdbc:mysql://localhost:3306/AgileDB";
-        String uname = "root";
-        String pass = "MaicholZed01.";
         PreparedStatement st = null;
         PreparedStatement checkEmailStmt = null;
         ResultSet rs = null;
@@ -22,7 +19,7 @@ public class Database {
 
 
         try {
-            con = DriverManager.getConnection(url, uname, pass);
+            con = Database.collegamento();
 
             String checkEmailQuery = "SELECT email FROM utenti WHERE email = ?";
             checkEmailStmt = con.prepareStatement(checkEmailQuery);
@@ -72,8 +69,6 @@ public class Database {
         }
         return registrato;
     }
-<<<<<<< Updated upstream
-=======
     /* 
     public static Connection collegamento() {
     	Connection x = null;
@@ -108,7 +103,6 @@ public class Database {
 		}
 	}
     
->>>>>>> Stashed changes
 }
 
 
