@@ -51,6 +51,8 @@ public class PaginaIController {
         loginController.setStage(stage);
 		Scene scenaLogin = new Scene(rootLogin, 700, 500);
         stage.setScene(scenaLogin);
+        stage.setMinWidth(1000);
+        stage.setMinHeight(800);
 	
   	  }
 
@@ -58,8 +60,9 @@ public class PaginaIController {
 		public void registrazione(ActionEvent event) throws Exception{
 			System.out.println("ok");
 			
-				Boolean registrazioneOk = Database.connection(pInput.getText(), emailInput.getText(),uInput.getText(), null);
+			Boolean registrazioneOk = Database.connection(pInput.getText(), emailInput.getText(),uInput.getText(), null);
 
+<<<<<<< Updated upstream
                 if(registrazioneOk){
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstRow/view/Dashboard.fxml"));
                     Parent dashboardRoot = loader.load();
@@ -69,6 +72,19 @@ public class PaginaIController {
                     stage.setMinWidth(1000);
                     stage.setMinHeight(800);
                     stage.show();
+=======
+            if(registrazioneOk){
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AttivitaCompletate.fxml"));
+                Parent dashboardRoot = loader.load();
+                Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                AttivitaCompletateController dashController = loader.getController();
+                dashController.setDialogStage(this.stage);
+                Scene dashboardScene = new Scene(dashboardRoot, 1000, 700); // Imposta le dimensioni che preferisci
+                stage.setScene(dashboardScene);
+                stage.setMinWidth(1000);
+                stage.setMinHeight(800);
+                stage.show();
+>>>>>>> Stashed changes
                 }
 				
 		}

@@ -10,35 +10,6 @@ import java.sql.*;
 
 public class Database {
 
-
-    public static void removeD(Connection con) throws SQLException{
-
-        Statement st = null;
-        ResultSet rs = null;
-        String query2 = "delete from utenti";
-        String query3 = "SET SQL_SAFE_UPDATES = 0;";
-
-        try {
-            st = con.createStatement();
-            st.executeUpdate(query3);
-            st.executeUpdate(query2);
-
-            if(rs.next()){
-                System.out.println(rs.getString("email"));
-            }
-
-
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        finally {
-            if (rs != null){rs.close();}
-            if (st != null){ st.close();};
-        }
-
-
-    }
-
     public static boolean connection(String pInput, String email, String usernameI, Connection con) throws Exception{
 
         String url = "jdbc:mysql://localhost:3306/AgileDB";
@@ -47,6 +18,7 @@ public class Database {
         PreparedStatement st = null;
         PreparedStatement checkEmailStmt = null;
         ResultSet rs = null;
+        boolean registrato = true;
 
 
         try {
@@ -68,11 +40,12 @@ public class Database {
                 errorWindow.setTitle("Errore");
                 errorWindow.setScene(errorScene);
                 errorWindow.show();
+                registrato = false;
 
             }
 
             else{
-                removeD(con);
+
                 st = con.prepareStatement("insert into utenti (email, pass, username) values (?, ?, ?)");
                 st.setString(1, email);
                 st.setString(2, pInput);
@@ -83,6 +56,7 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            registrato = false; 
 
         }
 
@@ -90,11 +64,51 @@ public class Database {
 
         finally {
 
-            st.close();
-            con.close();
+            if (rs != null) rs.close();
+            if (checkEmailStmt != null) checkEmailStmt.close();
+            if (st != null) st.close();
+            if (con != null) con.close();
+
         }
-        return true;
+        return registrato;
     }
+<<<<<<< Updated upstream
+=======
+    /* 
+    public static Connection collegamento() {
+    	Connection x = null;
+    	try { //jdbc:mysql://127.0.0.1:3306/?user=root  
+ 			x = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/AgileDB", "root", "password"); //michele ("jdbc:mysql://localhost:3306/AgileDB", "root", "MaicholZed01."), armando("jdbc:mysql://127.0.0.1:3306/firstrow", "root", "Higdrasil1!34")
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return x;
+    }
+
+    */
+
+    public static Connection collegamento(){
+		try {
+			String url = System.getProperty("DATABASE_URL");  // Prende la variabile d'ambiente
+			String user = System.getProperty("DATABASE_USERNAME");
+			String password = System.getProperty("DATABASE_PASSWORD");
+	
+			if (url == null) {
+				// Usa il database di produzione SOLO se non è in esecuzione un test
+				url = "jdbc:mysql://127.0.0.1:3306/AgileDB";
+				user = "root";
+				password = "MaicholZed01.";
+			}
+            System.out.println(url);
+			return DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+    
+>>>>>>> Stashed changes
 }
 
 
