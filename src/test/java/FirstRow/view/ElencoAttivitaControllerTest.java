@@ -20,7 +20,7 @@ public class ElencoAttivitaControllerTest extends TestFXBase{
 	@Override
 	public void start(Stage stage) throws Exception{
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainFx.class.getResource("view/ElencoAttivita.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("ElencoAttivita.fxml"));
         Parent page = loader.load();
 
 
