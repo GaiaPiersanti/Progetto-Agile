@@ -145,7 +145,7 @@ public class DashboardAttivitaController implements Initializable {
         ElencoAttivitaController controller = loader.getController();
         controller.setDialogStage(StageCompl);
         
-        StageCompl.setTitle("Elenco Attvità");
+        StageCompl.setTitle("Elenco Attività");
         StageCompl.setScene(new Scene(root));
         StageCompl.show();
     }
