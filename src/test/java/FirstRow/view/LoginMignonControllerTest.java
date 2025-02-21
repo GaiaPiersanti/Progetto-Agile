@@ -15,31 +15,7 @@ import FirstRow.TestFXBase;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.concurrent.TimeoutException;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.testfx.api.FxRobotException;
-import org.testfx.api.FxToolkit;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
-
-import FirstRow.Database;
-import FirstRow.MainFx;
-import FirstRow.TestFXBase;
-import FirstRow.view.LoginMignonController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
 
 class LoginMignonControllerTest extends TestFXBase{
 	final String MAIL_FIELD_ID = "#MailField";
@@ -56,9 +32,9 @@ class LoginMignonControllerTest extends TestFXBase{
 	
 	@BeforeAll
 	static void setUp() {     //jdbc:mysql://127.0.0.1:3307/?user=testuser    jdbc:mysql://localhost:3306/?user=root  jdbc:mysql://127.0.0.1:3306/testdb
-		System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/?testdb");
+		System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/?user=root");
     	System.setProperty("DATABASE_USERNAME", "root");
-    	System.setProperty("DATABASE_PASSWORD", "password");
+    	System.setProperty("DATABASE_PASSWORD", "password"); //password , MaicholZed01.
 		try {
 			//Thread.sleep(10000);
 			Connection con = Database.collegamento();
@@ -87,6 +63,15 @@ class LoginMignonControllerTest extends TestFXBase{
 								"\tusername char(25) not null,\n" + //
 								"    email char(100) not null unique,\n" + //
 								"    pass char(25) not null\n" + //
+								");");
+					stmt.executeUpdate(
+								"create table if not exists attivita (\n" + //
+								"\tid INT AUTO_INCREMENT PRIMARY KEY,\n" + //
+								"\tnome VARCHAR(255) NOT NULL,\n" + //
+								"categoria VARCHAR(255),\n"+ //                                       "\n" + //
+								" scadenza DATE\n," + //
+								" priorita VARCHAR(50),\n" + //
+								" completato BOOL NOT NULL DEFAULT FALSE\n" + //
 								");");
 					stmt.executeUpdate("INSERT INTO utenti (username,email,pass) values ('Mino','Dedalo@gmail.com','Tauro');");
 
