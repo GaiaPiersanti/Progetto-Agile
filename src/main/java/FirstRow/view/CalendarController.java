@@ -138,7 +138,7 @@ public class CalendarController {
         
         ElencoAttivitaController controller = loader.getController();
         controller.setDialogStage(Stage);
-        Stage.setTitle("Elenco Attvità");
+        Stage.setTitle("Elenco Attività");
         Stage.setScene(new Scene(root));
         Stage.show();
     }
