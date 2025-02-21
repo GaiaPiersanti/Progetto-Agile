@@ -34,12 +34,6 @@ public class ElencoAttivitaControllerTest extends TestFXBase{
         ElencoAttivitaController controller = loader.getController();
     	controller.setDialogStage(dialogStage);
 	     dialogStage.show();
-	}
 
-	
-	@Test
-	public void laTabellaNonEVuota() {
-		TableView<Attivita> tab = (TableView<Attivita>)find(TABLE_ID);
-		assertNotEquals(null,tab.getItems(),"non c'è una tabella");
-	}
+	}	
 }

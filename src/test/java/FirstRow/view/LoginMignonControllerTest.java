@@ -47,7 +47,7 @@ class LoginMignonControllerTest extends TestFXBase{
 	static void setUp() {     //jdbc:mysql://127.0.0.1:3307/?user=testuser    jdbc:mysql://localhost:3306/?user=root
 		System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/?user=root");
     	System.setProperty("DATABASE_USERNAME", "root");
-    	System.setProperty("DATABASE_PASSWORD", "password");
+    	System.setProperty("DATABASE_PASSWORD", "MaicholZed01.");
 		try {
 			//Thread.sleep(10000);
 			Connection con = Database.collegamento();
@@ -64,7 +64,7 @@ class LoginMignonControllerTest extends TestFXBase{
 				//}
 				System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/testdb");
 				System.setProperty("DATABASE_USERNAME", "root");
-				System.setProperty("DATABASE_PASSWORD", "password");
+				System.setProperty("DATABASE_PASSWORD", "MaicholZed01.");
 	
 				try {
 					
@@ -91,7 +91,7 @@ class LoginMignonControllerTest extends TestFXBase{
 		try {
 			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("drop database testdb;");
+			stmt.executeUpdate("drop database testdb;");
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
