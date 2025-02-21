@@ -81,7 +81,7 @@ class PaginaIControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FirstRow/view/PaginaIniziale.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PaginaIniziale.fxml"));
         Parent root = loader.load();
         paginaIController = loader.getController();
         paginaIController.setStage(stage);
