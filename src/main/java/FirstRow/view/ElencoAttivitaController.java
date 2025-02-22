@@ -121,7 +121,7 @@ public class ElencoAttivitaController implements Initializable {
 	@FXML
 	private void handleAggiunta(ActionEvent event) throws IOException {
 		// Carica il file FXML della interfaccia per aggiungere un'attività.
-		FXMLLoader loaderAttivita = new FXMLLoader(getClass().getClassLoader().getResource("FirstRow/view/Attivita.fxml"));
+		FXMLLoader loaderAttivita = new FXMLLoader(getClass().getClassLoader().getResource("Attivita.fxml"));
         Parent rootAggiungiA = loaderAttivita.load();
 		// Chiama il controller della classe AggiungiAttivitaController
 		AggiungiAttivitaController controller = loaderAttivita.getController();
