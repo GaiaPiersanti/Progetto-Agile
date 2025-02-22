@@ -96,7 +96,7 @@ class AggiungiAttivitaControllerTest extends TestFXBase {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FirstRow/view/ElencoAttivita.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ElencoAttivita.fxml"));
 
         Parent root = loader.load();
 
