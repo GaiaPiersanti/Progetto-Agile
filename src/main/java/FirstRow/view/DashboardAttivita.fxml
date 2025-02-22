@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -14,9 +18,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1050.0" prefWidth="1440.0" styleClass="parent" stylesheets="@Stylesheets.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstRow.view.DashboardAttivitaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1442.0" styleClass="parent" stylesheets="@Stylesheets.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstRow.view.DashboardAttivitaController">
    <left>
-      <AnchorPane prefHeight="852.0" prefWidth="71.0" styleClass="parent" stylesheets="@../../../resources/FirstRow/view/sideBar.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefWidth="71.0" styleClass="parent" stylesheets="@../../../resources/FirstRow/view/sideBar.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="bannerImageIP" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -42,11 +46,22 @@
       </AnchorPane>
    </left>
    <center>
-      <TabPane prefHeight="1047.0" prefWidth="1362.0">
+      <TabPane>
          <tabs>
             <Tab closable="false" text="Grafico mensile                                                                                                                                             ">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane>
+                     <children>
+                        <LineChart fx:id="Grafo30giorni" prefHeight="668.0" prefWidth="1347.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" tickLength="50.0" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis prefWidth="33.0" side="LEFT" upperBound="20.0" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
             <Tab closable="false" text="Attività completate                                                                                                                                 ">
@@ -65,7 +80,7 @@
                               </DropShadow>
                            </effect>
                         </Label>
-                        <TableView fx:id="TabellaAttivita" layoutX="11.0" layoutY="93.0" prefHeight="923.0" prefWidth="763.0" style="-fx-background-color: #f3f3f3f3;" styleClass="pane">
+                        <TableView fx:id="TabellaAttivita" layoutX="11.0" layoutY="93.0" prefHeight="451.0" prefWidth="763.0" style="-fx-background-color: #f3f3f3f3;" styleClass="pane">
                            <columns>
                               <TableColumn fx:id="ColNome" editable="false" prefWidth="287.6251678466797" styleClass="pane" text="Nome" />
                               <TableColumn fx:id="ColCategoria" editable="false" prefWidth="188.37484741210938" styleClass="pane" text="Categoria" />
@@ -85,7 +100,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1015.0" prefWidth="1331.0">
                      <children>
-                        <TableView fx:id="TabellaAttivitaUrgenti" layoutX="10.0" layoutY="95.0" prefHeight="923.0" prefWidth="763.0" style="-fx-background-color: #f3f3f3f3;" styleClass="pane">
+                        <TableView fx:id="TabellaAttivitaUrgenti" layoutX="10.0" layoutY="95.0" prefHeight="480.0" prefWidth="763.0" style="-fx-background-color: #f3f3f3f3;" styleClass="pane">
                            <columns>
                               <TableColumn fx:id="ColNome1" editable="false" prefWidth="287.6251678466797" styleClass="pane" text="Nome" />
                               <TableColumn fx:id="ColCategoria1" editable="false" prefWidth="188.37484741210938" styleClass="pane" text="Categoria" />
@@ -108,6 +123,22 @@
                               </DropShadow>
                            </effect>
                         </Label>
+                        <BarChart fx:id="GraficoIstogrammaUrgenti" alternativeColumnFillVisible="true" categoryGap="1.0" layoutX="786.0" layoutY="119.0" prefHeight="435.0" prefWidth="561.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" tickLength="30.0">
+                                 <tickLabelFont>
+                                    <Font size="10.0" />
+                                 </tickLabelFont>
+                              </CategoryAxis>
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" upperBound="15.0">
+                                 <tickLabelFont>
+                                    <Font size="10.0" />
+                                 </tickLabelFont>
+                              </NumberAxis>
+                          </yAxis>
+                        </BarChart>
                      </children>
                   </AnchorPane>
               </content>

@@ -54,7 +54,7 @@ public class PaginaIController {
         Parent rootLogin = loader.load();
         LoginMignonController loginController = loader.getController();
         loginController.setStage(stage);
-		Scene scenaLogin = new Scene(rootLogin, 700, 500);
+		Scene scenaLogin = new Scene(rootLogin);
         stage.setScene(scenaLogin);
         stage.setMinWidth(700);
         stage.setMinHeight(500);
