@@ -1,7 +1,6 @@
 package FirstRow.view;
 
 import java.sql.Date;
-
 import FirstRow.Model.Attivita;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,10 +19,11 @@ public class ModificaAttivitaController {
     private DatePicker scadenzaAttivita;
     @FXML
     private ChoiceBox<String> prioritaAttivita;
-
     private Attivita attivitaSelezionata;
     private ElencoAttivitaController elencoController;
     private Stage stage;
+
+    //Imposta l'attività selezionata da modificare e inizializza i campi della pagina di aggiunta delle attività con i valori dell'attività.
 
     public void setAttivita(Attivita selectedAttivita) {
         this.attivitaSelezionata = selectedAttivita;
@@ -32,6 +32,7 @@ public class ModificaAttivitaController {
         scadenzaAttivita.setValue(java.time.LocalDate.parse(selectedAttivita.getScadenza().toString()));
         prioritaAttivita.setValue(selectedAttivita.getPriorita());
     }
+    //Imposta il riferimento al controller dell'elenco delle attività in questo modo dopo la modifica viene usato per aggiornamento della TableView nel controller principale.
 
     public void setElencoController(ElencoAttivitaController elencoAttivitaController) {
 
@@ -48,6 +49,7 @@ public class ModificaAttivitaController {
         prioritaAttivita.getItems().addAll("Alta", "Media", "Bassa");
 
     }
+    //Metodo che mi salva le modifiche di una attività selezionata crea un nuovo oggetto Attivita con i dati modificati e aggiorna l'attività tramite il controller principale e chiude la finestra.
 
 
     @FXML

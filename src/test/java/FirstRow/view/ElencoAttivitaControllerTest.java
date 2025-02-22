@@ -1,15 +1,9 @@
 package FirstRow.view;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import org.junit.Test;
-
-import FirstRow.MainFx;
 import FirstRow.TestFXBase;
-import FirstRow.Model.Attivita;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 public class ElencoAttivitaControllerTest extends TestFXBase{

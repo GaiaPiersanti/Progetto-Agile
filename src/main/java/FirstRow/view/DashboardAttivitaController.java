@@ -11,9 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.time.LocalDate;
-
 import FirstRow.Database;
-import FirstRow.MainFx;
 import FirstRow.Model.Attivita;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

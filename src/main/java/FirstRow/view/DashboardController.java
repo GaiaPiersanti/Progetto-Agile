@@ -5,15 +5,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.time.LocalTime;
-
-import com.calendarfx.model.Calendar;
-import com.calendarfx.model.Calendar.Style;
-import com.calendarfx.model.CalendarSource;
-import com.calendarfx.view.CalendarView;
-
-import FirstRow.MainFx;
-import FirstRow.Model.Attivita;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class DashboardController {
