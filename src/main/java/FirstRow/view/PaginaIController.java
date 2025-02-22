@@ -49,10 +49,10 @@ public class PaginaIController {
         Parent rootLogin = loader.load();
         LoginMignonController loginController = loader.getController();
         loginController.setStage(stage);
-		Scene scenaLogin = new Scene(rootLogin, 700, 500);
+		Scene scenaLogin = new Scene(rootLogin);
         stage.setScene(scenaLogin);
-        stage.setMinWidth(1000);
-        stage.setMinHeight(800);
+        stage.setMinWidth(700);
+        stage.setMinHeight(500);
 	
   	  }
 
@@ -68,7 +68,7 @@ public class PaginaIController {
                     Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                     DashboardAttivitaController dashController = loader.getController();
                     dashController.setDialogStage(this.stage);
-                    Scene dashboardScene = new Scene(dashboardRoot, 1000, 700); // Imposta le dimensioni che preferisci
+                    Scene dashboardScene = new Scene(dashboardRoot, 1000, 700); 
                     stage.setScene(dashboardScene);
                     stage.setMinWidth(1000);
                     stage.setMinHeight(800);

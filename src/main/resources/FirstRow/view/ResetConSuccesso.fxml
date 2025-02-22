@@ -57,7 +57,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="bRegistrazione" layoutX="139.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleImput" prefHeight="40.0" prefWidth="222.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Torna alla schermata di Log in">
+      <Button fx:id="ResetSuccessButton" layoutX="139.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleImput" prefHeight="40.0" prefWidth="222.0" styleClass="parent" stylesheets="@../../../java/FirstRow/view/registrazioneButton.css" text="Torna alla schermata di Log in">
          <font>
             <Font name="Jaini Regular" size="18.0" />
          </font>
