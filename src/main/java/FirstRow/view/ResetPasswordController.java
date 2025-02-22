@@ -43,6 +43,7 @@ public class ResetPasswordController {
 	private ImageView bannerImageRegistrazione;
 
     Stage ResetStage;
+    
 
     public void setStage(Stage primaryStage) {
         this.ResetStage = primaryStage;
@@ -95,6 +96,12 @@ public class ResetPasswordController {
             return;
          }
 
+        //setta il messaggio di errore se i campi newPassword e newPassword2 sono vuoti
+        if((newPassword == null && newPassword2 == null) || (newPassword.isEmpty() && newPassword2.isEmpty())){
+            MessaggioErrore.setText( "Devi scrivere la nuova password!");
+            return;
+         }
+
         //se è tutto corretto resetta la password nel db
         String query = "UPDATE utenti SET pass = ? WHERE email = ?";
 
@@ -104,12 +111,15 @@ public class ResetPasswordController {
                 stmt.setString(1, newPassword);
                 stmt.setString(2, email);
                 stmt.executeUpdate();
+                
 
         } catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Errore nel reset del password");
 		}
+                    
                     //passaggio dal reset pw alla pagina reset con successo
+                    
                     try{
                     // Load the fxml file and create a new stage for the popup dialog.
 		        	FXMLLoader loader = new FXMLLoader();
@@ -130,10 +140,17 @@ public class ResetPasswordController {
                         e.printStackTrace();
                         System.out.println("Errore nell'apertura della pagina");
 
-                    }
-
-    }
-
-
+                    }                
 
 }
+            /**
+            * Metodo per verificare se il reset è riuscito controllando il cambio scena. (resetPasswordView è l'FXID del nodo root)
+            * @return true se la scena è cambiata, false se l'utente è ancora nella schermata di reset della password.
+            */
+            public boolean isResetSuccessful() {
+            return ResetStage.getScene() != null && !ResetStage.getScene().getRoot().getId().equals("resetPasswordView");
+            }
+
+}
+
+
