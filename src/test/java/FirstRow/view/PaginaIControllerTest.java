@@ -62,15 +62,15 @@ class PaginaIControllerTest extends ApplicationTest {
 								"    email char(100) not null unique,\n" + //
 								"    pass char(25) not null\n" + //
 								");");
-          stmt.executeUpdate(
-                "create table if not exists attivita (\n" + //
-                "\tid INT AUTO_INCREMENT PRIMARY KEY,\n" + //
-                "\tnome VARCHAR(255) NOT NULL,\n" + //
-                "categoria VARCHAR(255),\n"+ //                                      
-                " scadenza DATE\n," + //
-                " priorita VARCHAR(50),\n" + //
-                " completato BOOL NOT NULL DEFAULT FALSE\n" + //
-                ");");
+                     stmt.executeUpdate(
+                                "create table if not exists attivita (\n" + //
+                                "\tid INT AUTO_INCREMENT PRIMARY KEY,\n" + //
+                                "\tnome VARCHAR(255) NOT NULL,\n" + //
+                                "categoria VARCHAR(255),\n"+ //                                      
+                                " scadenza DATE\n," + //
+                                " priorita VARCHAR(50),\n" + //
+                                " completato BOOL NOT NULL DEFAULT FALSE\n" + //
+                                ");");
 					stmt.executeUpdate("INSERT INTO utenti (username,email,pass) values ('Mino','Dedalo@gmail.com','Tauro');");
 
 			}catch (SQLException e) {

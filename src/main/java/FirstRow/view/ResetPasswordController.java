@@ -42,6 +42,8 @@ public class ResetPasswordController {
     @FXML
 	private ImageView bannerImageRegistrazione;
 
+    
+
     Stage ResetStage;
     
 

@@ -15,9 +15,11 @@ public class TestFXBase extends ApplicationTest {
 
 	
 	@Before
-	public void setUpClass() throws Exception{
-		ApplicationTest.launch(MainFx.class);
-	}
+	public void setUpClass() throws Exception {
+    
+        ApplicationTest.launch(MainFx.class);
+    
+}
 	
 	
 	@After

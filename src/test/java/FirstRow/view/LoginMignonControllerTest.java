@@ -102,8 +102,10 @@ class LoginMignonControllerTest extends TestFXBase{
 	
 	@Override
 	public void start(Stage stage) throws Exception{
+		System.out.println(" Entrato nel metodo start()");
 		 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("loginMignon.fxml"));
 	     Parent rootLogin = loader.load();
+		 System.out.println("🔍 Scene caricata: loginMignon.fxml");
 	     loginController = loader.getController();
 	     loginController.setStage(stage);
 	     Scene scenaLogin = new Scene(rootLogin, 700, 500);
