@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -30,6 +31,8 @@ public class AggiungiAttivitaController {
     private ChoiceBox<String> prioritaAttivita;
     @FXML
     private TextField nuovaCategoria; // Campo per inserire nuova categoria
+    @FXML
+    private Button buttonAggiungi;
     private Stage stage;
     private ElencoAttivitaController elencoController;
     private ObservableList<String> categorieList = FXCollections.observableArrayList();

@@ -88,7 +88,6 @@ class LoginMignonControllerTest extends TestFXBase{
 			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate("drop database testdb;");
-			//stmt.executeUpdate("drop database testdb;");
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {

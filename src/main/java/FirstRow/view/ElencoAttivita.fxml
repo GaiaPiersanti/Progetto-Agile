@@ -24,7 +24,7 @@
                   <Image url="@../../../resources/Immagini/IconaProfilo.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bannerImageIC" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="275.0" onMouseClicked="#dashboard" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bannerImageIC" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/Immagini/CasaIcona.png" />
                </image>
@@ -34,7 +34,7 @@
                   <Image url="@../../../resources/Immagini/IconaLista.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bannerImageICalendario" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="330.0" onMouseClicked="#Calendario" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bannerImageICalendario" fitHeight="76.0" fitWidth="125.0" layoutX="2.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/Immagini/IconaCalendario.png" />
                </image>
@@ -59,7 +59,7 @@
                         </DropShadow>
                      </effect>
                   </Label>
-                  <Button layoutX="723.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleAggiunta" prefHeight="40.0" prefWidth="131.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Aggiungi Attività">
+                  <Button fx:id="buttonAggiunta" layoutX="723.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleAggiunta" prefHeight="40.0" prefWidth="131.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Aggiungi Attività">
                      <effect>
                         <DropShadow>
                            <color>
@@ -71,7 +71,7 @@
                         <Font name="Jaini Regular" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="591.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleModifica" prefHeight="40.0" prefWidth="123.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Modifica Attività">
+                  <Button fx:id="bModifica" layoutX="591.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleModifica" prefHeight="40.0" prefWidth="123.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Modifica Attività">
                      <effect>
                         <DropShadow>
                            <color>
@@ -83,7 +83,7 @@
                         <Font name="Jaini Regular" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="457.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleElimina" prefHeight="40.0" prefWidth="125.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Elimina Attività">
+                  <Button fx:id="bElimina" layoutX="457.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleElimina" prefHeight="40.0" prefWidth="125.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Elimina Attività">
                      <effect>
                         <DropShadow>
                            <color>
@@ -139,18 +139,6 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Button layoutX="298.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleComleta" prefHeight="40.0" prefWidth="148.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Segna Completata">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color red="0.6447368264198303" green="0.6447368264198303" blue="0.6447368264198303" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                     <font>
-                        <Font name="Jaini Regular" size="13.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
          </children>

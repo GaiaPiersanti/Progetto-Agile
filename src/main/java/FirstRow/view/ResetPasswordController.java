@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import FirstRow.Database;
-import FirstRow.MainFx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -154,5 +153,3 @@ public class ResetPasswordController {
             }
 
 }
-
-

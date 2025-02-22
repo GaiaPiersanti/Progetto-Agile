@@ -106,7 +106,7 @@
                </color>
             </InnerShadow>
          </effect></ChoiceBox>
-      <Button layoutX="345.0" layoutY="458.0" mnemonicParsing="false" onAction="#aggiungi" prefHeight="23.0" prefWidth="77.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Aggiungi">
+      <Button fx:id="buttonAggiungi" layoutX="345.0" layoutY="458.0" mnemonicParsing="false" onAction="#aggiungi" prefHeight="23.0" prefWidth="77.0" styleClass="parent" stylesheets="@registrazioneButton.css" text="Aggiungi">
          <effect>
             <DropShadow>
                <color>

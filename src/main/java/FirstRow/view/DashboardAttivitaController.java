@@ -14,9 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.time.LocalDate;
-
 import FirstRow.Database;
-import FirstRow.MainFx;
 import FirstRow.Model.Attivita;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

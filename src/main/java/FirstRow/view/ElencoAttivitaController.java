@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -25,23 +26,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
-
-
-import com.calendarfx.model.Calendar;
-import com.calendarfx.model.CalendarSource;
-import com.calendarfx.model.Calendar.Style;
-import com.calendarfx.view.CalendarView;
-
 import FirstRow.Database;
-import FirstRow.MainFx;
 import FirstRow.Model.Attivita;
 
 public class ElencoAttivitaController implements Initializable {
 	
-	@FXML
-	private TableView<Attivita> TabellaAttivita;
+	@FXML TableView<Attivita> TabellaAttivita;
 	@FXML
 	private TableColumn<Attivita,String> ColNome;
 	@FXML
@@ -60,33 +51,40 @@ public class ElencoAttivitaController implements Initializable {
 	private ImageView bannerImageICalendario;
 	@FXML
 	private TextField SearchField;
+	@FXML
+	private Button buttonAggiunta;
+	
 	
 	private Stage StageIn;
-	
+
+	// Metodo che carica le immagini del banner imposta le caselle della TableView e carica le attività dal database.
+	 
 	@Override
     public void initialize ( URL location, ResourceBundle resources ) {
+		// Carica e imposta l'immagine per l'icona "Casa"
 		File bannerFile = new File("src/main/resources/Immagini/CasaIcona.png");
         Image iconaC = new Image(bannerFile.toURI().toString());
         bannerImageIC.setImage(iconaC);
-        
+         // Carica e imposta l'immagine per il calendario
         File bannerFileCalenadrio = new File("src/main/resources/Immagini/IconaCalendario.png");
         Image iconaCalenadrio = new Image(bannerFileCalenadrio.toURI().toString());
         bannerImageICalendario.setImage(iconaCalenadrio);
-
+ 		// Carica e imposta l'immagine per la lista
         File bannerFileLista = new File("src/main/resources/Immagini/IconaLista.png");
         Image iconaE = new Image(bannerFileLista.toURI().toString());
         bannerImageIE.setImage(iconaE);
-
+		// Carica e imposta l'immagine per il profilo
         File bannerFileProfilo = new File("src/main/resources/Immagini/IconaProfilo.png");
         Image iconaP = new Image(bannerFileProfilo.toURI().toString());
         bannerImageIP.setImage(iconaP);
         
-        
+        // Configura le colonne della TableView con i rispettivi campi dell'oggetto Attivita
         ColNome.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Nome"));
         ColCategoria.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Categoria"));
         ColScadenza.setCellValueFactory(new PropertyValueFactory<Attivita,Date>("Scadenza"));
         ColPriorita.setCellValueFactory(new PropertyValueFactory<Attivita,String>("Priorita"));
-        
+
+        // Ottiene una connessione al database e crea una lista di attività
 		Connection con = Database.collegamento();
 		ObservableList<Attivita> list = FXCollections.observableArrayList();
 		if (con == null) {
@@ -110,19 +108,24 @@ public class ElencoAttivitaController implements Initializable {
 		
 		TabellaAttivita.setItems(list);
     }
+
+	//Metodo per impostare lo Stage corrente
 	
+
 	public void setDialogStage(Stage dialogStage) {
         this.StageIn = dialogStage;
     }
-	
 
-	
+	//Metodo per l'aggiunta di una attvità che mi apre quando viene cliccato il tasto Aggiungi Attività uno stage che contiente i campi per le iformazioni dell'attività
+	 
 	@FXML
 	private void handleAggiunta(ActionEvent event) throws IOException {
-
+		// Carica il file FXML della interfaccia per aggiungere un'attività.
 		FXMLLoader loaderAttivita = new FXMLLoader(getClass().getClassLoader().getResource("Attivita.fxml"));
         Parent rootAggiungiA = loaderAttivita.load();
+		// Chiama il controller della classe AggiungiAttivitaController
 		AggiungiAttivitaController controller = loaderAttivita.getController();
+		// Passa un riferimento al controller dell'elenco in modo che dopo l'aggiunta la TableView si aggiorna
 		controller.setElencoController(this);
 		Stage stage = new Stage();
 		controller.setStage(stage);
@@ -131,10 +134,11 @@ public class ElencoAttivitaController implements Initializable {
 		stage.show();
 	}
 	
-	
+	//Metodo per la modifica di un'attività selezionata che apre una nuova finestra con le informazioni da compilare per la modifica
+
 	@FXML
 	private void handleModifica() {
-
+		// Recupera l'attività selezionata nella TableView
 		Attivita selectedAttivita = TabellaAttivita.getSelectionModel().getSelectedItem();
     
 		if (selectedAttivita != null) {
@@ -156,19 +160,21 @@ public class ElencoAttivitaController implements Initializable {
 		}
 	}
 
+	//Metodo per aggiornare un'attività modifica i dati nell'oggetto e aggiorna la TableView e il database.
+	
 	public void aggiornaAttivita(Attivita attivitaVecchia, Attivita attivitaNuova) {
 		attivitaVecchia.setNome(attivitaNuova.getNome());
 		attivitaVecchia.setCategoria(attivitaNuova.getCategoria());
 		attivitaVecchia.setScadenza(attivitaNuova.getScadenza());
 		attivitaVecchia.setPriorita(attivitaNuova.getPriorita());
 
-		// Aggiorna la visualizzazione della tabella
 		TabellaAttivita.refresh();
 
-		// Aggiorna anche nel database
 		aggiornaAttivitaNelDatabase(attivitaVecchia);
 	}
-	
+
+	//Metodo per aggiornare un'attività nel database.
+
 	private void aggiornaAttivitaNelDatabase(Attivita attivita) {
 		String query = "UPDATE attivita SET nome = ?, categoria = ?, scadenza = ?, priorita = ? WHERE nome = ?";
 
@@ -189,7 +195,8 @@ public class ElencoAttivitaController implements Initializable {
 		}
 	}
 	
-	
+	//Metodo per l'eliminazione di un'attività e rimuove l'attività dalla TableView e dal database.
+
 	@FXML
 	private void handleElimina() {
 		Attivita selectedAttivita = TabellaAttivita.getSelectionModel().getSelectedItem();
@@ -205,6 +212,8 @@ public class ElencoAttivitaController implements Initializable {
 		}
 
 		}
+	// Metodo per segnare un'attività come completata
+
 	@FXML
 	private void handleComleta() {
 		Attivita selectedAttivita = TabellaAttivita.getSelectionModel().getSelectedItem();
@@ -236,6 +245,7 @@ public class ElencoAttivitaController implements Initializable {
 		}
 
 		}
+		
 
 		private void eliminaAttivitaDalDatabase(Attivita attivita) {
    	 		String query = "DELETE FROM attivita WHERE nome = ? AND categoria = ? AND scadenza = ? AND priorita = ?";
@@ -256,10 +266,8 @@ public class ElencoAttivitaController implements Initializable {
 			}
 
 		}
-
-
 	
-	
+	//Metodo per gestire la ricerca avanzata filtra le attività in base al testo inserito
 	
 	@FXML
 	private void handleRicercaAvanzata() {
@@ -305,50 +313,51 @@ public class ElencoAttivitaController implements Initializable {
 					// Aggiorna la TableView con i risultati della ricerca
 					TabellaAttivita.setItems(risultatiRicerca);
 				}
-			
-				private void caricaTutteLeAttivita() {
-					ObservableList<Attivita> list = FXCollections.observableArrayList();
+	//Metodo per ricaricare tutte le attività dal database e aggiornare la TableView
+
+	private void caricaTutteLeAttivita() {
+		ObservableList<Attivita> list = FXCollections.observableArrayList();
     
-					String query = "SELECT nome, categoria, scadenza, priorita FROM attivita";
+		String query = "SELECT nome, categoria, scadenza, priorita FROM attivita";
 
-					try (Connection con = Database.collegamento();
-						Statement stmt = con.createStatement();
-						ResultSet rs = stmt.executeQuery(query)) {
+		try (Connection con = Database.collegamento();
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery(query)) {
 
-						while (rs.next()) {
+					while (rs.next()) {
 							list.add(new Attivita(
-								rs.getString("nome"),
-								rs.getString("categoria"),
-								rs.getDate("scadenza"),
-								rs.getString("priorita")
-							));
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-						System.out.println("Errore nel caricamento delle attività!");
+							rs.getString("nome"),
+							rs.getString("categoria"),
+							rs.getDate("scadenza"),
+							rs.getString("priorita")
+						));
 					}
+		} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Errore nel caricamento delle attività!");
+			}
 
 					// Aggiorna la TableView con tutti i dati
 					TabellaAttivita.setItems(list);
 				}
-			
-				public void aggiungiAttivitaAllaTabella(Attivita nuovaAttivita) {
+
+	public void aggiungiAttivitaAllaTabella(Attivita nuovaAttivita) {
 		
 		TabellaAttivita.getItems().add(nuovaAttivita);
 		
 	}
-
+	// Metodo per passare alla dashboard
 	public void dashboard(MouseEvent event) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("DashboardAttivita.fxml"));
 		Parent root = loader.load();
 		DashboardAttivitaController controller = loader.getController();
 		controller.setDialogStage(StageIn);
-		Stage stage = (Stage) TabellaAttivita.getScene().getWindow(); // Prendi lo Stage corrente
+		Stage stage = (Stage) TabellaAttivita.getScene().getWindow(); 
 		stage.setTitle("Dashboard");
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
-	
+	// Metodo per aprire il calendario 
 	public void Calendario(MouseEvent event) throws IOException{
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Calendar.fxml"));
         Parent root = loader.load();

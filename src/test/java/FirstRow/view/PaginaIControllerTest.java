@@ -26,15 +26,19 @@ class PaginaIControllerTest extends ApplicationTest {
     final String REGISTER_BUTTON_ID = "#bRegistrazione";
 
     PaginaIController paginaIController;
+    
+    //Metodo che configura il database di test e crea le tabelle necessarie
 
     @BeforeAll
     static void setUp() {     //jdbc:mysql://127.0.0.1:3307/?user=testuser    jdbc:mysql://localhost:3306/?user=root  jdbc:mysql://127.0.0.1:3306/testdb
-      
+        
+        // Imposta le proprietà di connessione al database
 		System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/?user=root");
     	System.setProperty("DATABASE_USERNAME", "root");
     	System.setProperty("DATABASE_PASSWORD", "password"); //password , MaicholZed01.
 		try {
-			//Thread.sleep(10000);
+            
+			// Crea una connessione e crea il database di test se non esiste
 			Connection con = Database.collegamento();
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate("create database if not exists testdb;\n" );
@@ -43,10 +47,8 @@ class PaginaIControllerTest extends ApplicationTest {
 			con.close();	
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} //catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					//e.printStackTrace();
-				//}
+		} 
+                // Imposta le proprietà di connessione per usare il database di test "testdb"
 				System.setProperty("DATABASE_URL", "jdbc:mysql://localhost:3306/testdb");
 				System.setProperty("DATABASE_USERNAME", "root");
 				System.setProperty("DATABASE_PASSWORD", "password");
@@ -78,6 +80,8 @@ class PaginaIControllerTest extends ApplicationTest {
 			}
 
 		}
+    
+    //Metodo che carica l'FXML principale apre lo stage contente la pagina di registrazione
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -91,6 +95,11 @@ class PaginaIControllerTest extends ApplicationTest {
         stage.setMinHeight(500);
         stage.show();
     }
+
+    /**
+     Test che verifica la registrazione corretta di un nuovo utente, 
+     inserisce valori  per username, email e password e poi controlla nel database che l'utente sia stato creato.
+     */
 
     @Test
     void registrazioneCorretta() {
@@ -116,9 +125,15 @@ class PaginaIControllerTest extends ApplicationTest {
             fail("Errore di connessione al database durante il controllo della registrazione");
     }
 
-    // Assicurati che l'utente sia stato registrato nel database
+    // Assicura che l'utente sia stato registrato nel database
     assertTrue(utenteRegistrato, "L'utente non è stato registrato correttamente nel database");
     }
+
+    /**
+    Test che verifica se  la registrazione fallisce quando si utilizza un'email già esistente,
+    vengono inseriti dati con l'email "Dedalo@gmail.com" che sono già presentei nel database,
+    ed effettuta un controllo se l'email esiste già nel database.
+     */
 
     @Test
     void registrazioneFallita_EmailEsistente() {
@@ -143,6 +158,7 @@ class PaginaIControllerTest extends ApplicationTest {
         assertTrue(utenteEsistente, "L'email è già registrata");
     }
 
+    //Metodo che limina il database di test e pulisce le proprietà impostate
 
     @AfterAll
     static void tearDown() {
